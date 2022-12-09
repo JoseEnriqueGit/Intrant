@@ -1,10 +1,9 @@
-const mongoose = require("mongoose");
+import { connect } from "mongoose";
+import { URI } from "./config.js";
 
-const URI = process.env.MONGODB_URI ? process.env.MONGODB_URI : "NO URI";
-
-main().catch((err) => console.log(err));
-
-async function main() {
-  await mongoose.connect(URI);
-  console.log("DB Connect");
+export async function connectDb() {
+    await connect(URI);
+    console.log("DB Connect");
 }
+
+connectDb().catch((err) => console.log(err));
