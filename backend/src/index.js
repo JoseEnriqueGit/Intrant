@@ -2,12 +2,7 @@
 // const server = require('./server')
 
 import { connectDb } from "./dbConnection.js";
-import express from "express";
-import postsRouters from "./routes/post.routes.js";
-
-const server = express();
-
-server.use(postsRouters);
+import server from "./server.js";
 
 const PORT = process.env.PORT || 4000;
 

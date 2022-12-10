@@ -1,13 +1,16 @@
-const express = require('express')
-const cors = require('cors')
-const server = express()
+// const cors = require('cors')
+
+
+
+import express from "express";
+import postsRouters from "./routes/citationsRouters.js";
+
+const server = express();
 
 // middlewares
-server.use(cors())
+// server.use(cors())
 server.use(express.json())
 
-// routes
-server.use('/allcitations', require('./routes/citation.route'))
-// server.use('/new-citation', require('./routes/citation.route'))
+server.use(postsRouters);
 
-module.exports = server
+export default server;
