@@ -28,12 +28,18 @@ export const newCitation = async (req, res) => {
 };
 
 export const modicCitation = async (req, res) => {
-	const update = await Citation.updateOne(
-		{ cedula: req.params.cedula },
-		req.body,
-		{ new: true }
-	);
-	res.send(update);
+	try {
+		const result = await Citation.updateOne({ cedula: req.params.cedula }, req.body,  { upsert: true });
+		res.status(200).json({
+			message: "Registro actualizado exitosamente",
+			result,
+		});
+	} catch (error) {
+		res.status(500).json({
+			message: "Error al actualizar el registro",
+			error,
+		});
+	}
 };
 
 export const deleteCitation = async (req, res) => {
