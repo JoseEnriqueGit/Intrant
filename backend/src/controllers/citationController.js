@@ -1,8 +1,23 @@
 import Citation from "../models/CitationModel.js";
 
 export const getAllCitations = async (req, res) => {
-	const allCitations = await Citation.find();
-	res.json(allCitations);
+	try {
+		const result = await Citation.find();
+		if (!result.length) {
+			return res.status(404).json({
+				message: "No se han encontrado registros",
+			});
+		}
+		res.status(200).json({
+			message: "Registros obtenidos exitosamente",
+			result,
+		});
+	} catch (error) {
+		res.status(500).json({
+			message: "Error al obtener los registros",
+			error,
+		});
+	}
 };
 
 export const getCitation = async (req, res) => {
