@@ -12,24 +12,27 @@ export const getCitation = async (req, res) => {
 };
 
 export const newCitation = async (req, res) => {
-	const { cedula, correo, telefono, asunto, oficina, fecha, hora } = req.body;
-
-	const newCitation = new Citation({
-		cedula: cedula,
-		correo: correo,
-		telefono: telefono,
-		asunto: asunto,
-		oficina: oficina,
-		fecha: fecha,
-		hora: hora,
-	});
-	await newCitation.save();
-	res.status(204).json(newCitation);
+	try {
+		const result = await Citation.create(req.body);
+		res.status(201).json({
+			message: "Registro creado exitosamente",
+			result,
+		});
+	} catch (error) {
+		res.status(500).json({
+			message: "Error al crear el registro",
+			error,
+		});
+	}
 };
 
 export const modicCitation = async (req, res) => {
 	try {
-		const result = await Citation.updateOne({ cedula: req.params.cedula }, req.body,  { upsert: true });
+		const result = await Citation.updateOne(
+			{ cedula: req.params.cedula },
+			req.body,
+			{ upsert: true }
+		);
 		res.status(200).json({
 			message: "Registro actualizado exitosamente",
 			result,
