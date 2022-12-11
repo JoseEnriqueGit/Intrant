@@ -6,9 +6,24 @@ export const getAllCitations = async (req, res) => {
 };
 
 export const getCitation = async (req, res) => {
-	const citationData = await Citation.findOne({ cedula: req.params.cedula });
-
-	res.send(citationData);
+	try {
+		const result = await Citation.findOne({ cedula: req.params.cedula });
+		if (!result) {
+			return res.status(404).json({
+				message: "El registro solicitado no ha sido encontrado",
+				result,
+			});
+		}
+		res.status(200).json({
+			message: "Registro obtenido exitosamente",
+			result,
+		});
+	} catch (error) {
+		res.status(500).json({
+			message: "Error al obtener el registro",
+			error,
+		});
+	}
 };
 
 export const newCitation = async (req, res) => {
