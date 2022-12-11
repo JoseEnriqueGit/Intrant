@@ -26,11 +26,10 @@ export const newCitation = async (req, res) => {
 };
 export const modicCitation = async (req, res) => {
 	const update = await Citation.updateOne({cedula: req.params.cedula}, req.body, {new: true})
-
-	console.log(update);
 	res.send(update);
 };
 export const deleteCitation = async (req, res) => {
-	await Citation.remove({ cedula: req.params.cedula });
+	await Citation.deleteOne({ cedula: req.params.cedula });
 	res.status(204).send("Ok");
 };
+``
