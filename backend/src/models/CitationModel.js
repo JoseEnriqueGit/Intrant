@@ -28,4 +28,4 @@ const citationSchema = new mongoose.Schema({
 	},
 });
 
-export default mongoose.model('Citation', citationSchema);
+export default mongoose.model("Citation", citationSchema);
