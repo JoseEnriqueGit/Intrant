@@ -7,7 +7,7 @@ import { Form, TitleHeader, Button, DatePdf } from '../../../components';
 import { faChevronLeft, faHomeAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // Context
-import { FormDataContext, DataApiContext } from '../../../context';
+import { FormDataContext, DataApiContext } from '../../../hooks/contexts';
 
 const ConfirmCitation = props => {
 	const { formData } = useContext(FormDataContext);

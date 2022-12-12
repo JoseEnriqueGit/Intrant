@@ -2,7 +2,7 @@
 import { useEffect, useState, createContext, useContext } from 'react';
 import axios from 'axios';
 // Context
-import { FormDataContext, DataApiContext } from '../context';
+import { FormDataContext, DataApiContext } from '../contexts';
 
 export const UrlApi = createContext();
 

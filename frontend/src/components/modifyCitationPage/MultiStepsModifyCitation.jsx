@@ -3,7 +3,7 @@ import { useContext } from 'react';
 // components
 import { ModifyValidation, ModifyCitation } from './stepForm';
 // Context
-import PageContext from '../../context/PageContext';
+import PageContext from '../../hooks/contexts/PageContext';
 
 export const MultiStepsModifyCitation = () => {
 	const { page, setPage } = useContext(PageContext);

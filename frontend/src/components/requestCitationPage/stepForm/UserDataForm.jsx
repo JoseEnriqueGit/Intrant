@@ -13,8 +13,12 @@ import {
 } from '../../../components';
 import { bornDateUser } from '../../../logic/date';
 // context
-import { FormDataContext, PageContext, DataApiContext } from '../../../context';
-import UrlApi from '../../../useEffect/UrlApi';
+import {
+	FormDataContext,
+	PageContext,
+	DataApiContext,
+} from '../../../hooks/contexts';
+import UrlApi from '../../../hooks/useEffects/useDataCedula';
 
 const UserDataForm = () => {
 	const { formData, setFormData } = useContext(FormDataContext);

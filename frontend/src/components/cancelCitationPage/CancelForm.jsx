@@ -7,8 +7,8 @@ import { Form, TitleHeader, Button, WarningDiv } from '../../components';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // Context
-import { FormDataContext, DataApiContext } from '../../context';
-import UrlApi from '../../useEffect/UrlApi';
+import { FormDataContext, DataApiContext } from '../../hooks/contexts';
+import UrlApi from '../../hooks/useEffects/useDataCedula';
 
 const CancelForm = props => {
 	const { formData, setFormData } = useContext(FormDataContext);

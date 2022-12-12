@@ -7,8 +7,13 @@ import { Form, TitleHeader, Button, WarningDiv } from '../../../components';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // Context
-import { FormDataContext, PageContext, DataApiContext, DataInStorageContext } from '../../../context';
-import UrlApi from '../../../useEffect/UrlApi';
+import {
+	FormDataContext,
+	PageContext,
+	DataApiContext,
+	DataInStorageContext,
+} from '../../../hooks/contexts';
+import UrlApi from '../../../hooks/useEffects/useDataCedula';
 
 const ModifyValidation = () => {
 	const { formData, setFormData } = useContext(FormDataContext);

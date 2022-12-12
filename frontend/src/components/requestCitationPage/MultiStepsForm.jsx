@@ -3,8 +3,8 @@ import { useContext } from 'react';
 // components
 import { UserDataForm, DateServiceForm, ConfirmCitation } from './stepForm';
 // Context
-import FormDataContext from '../../context/FormDataContext';
-import PageContext from '../../context/PageContext';
+import FormDataContext from '../../hooks/contexts/FormDataContext';
+import PageContext from '../../hooks/contexts/PageContext';
 
 const MultiStepsForm = () => {
 	const { setFormData } = useContext(FormDataContext);
