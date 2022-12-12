@@ -1,0 +1,79 @@
+@use '../util/var' as var;
+@use '../util/mixins' as mixin;
+
+.FormConfirmCitation {
+	@include mixin.form();
+
+    fieldset {
+		@include mixin.fieldset();
+
+        legend {
+			@include mixin.legend();
+		}
+
+        ul {
+			@include mixin.ul();
+
+			div{
+
+				li{
+					@include mixin.liConfirmCitation();
+
+					strong{
+						@include mixin.strong();
+					}
+					span{
+						@include mixin.span();
+					}
+				}
+			}
+
+
+            li {
+				@include mixin.li();
+
+				// Buttons
+				.NextBtn{
+					@include mixin.NextBtn();
+				}
+				.NextBtn:hover{
+					@include mixin.NextBtnHover();
+
+				}
+				.NextBtn:disabled{
+					@include mixin.NextBtnDisabled();
+				}
+
+				.BackBtn{
+					@include mixin.BackBtn();
+				}
+				.BackBtn:hover{
+					@include mixin.BackBtnHover();
+				}
+				.BackBtn:disabled{
+					@include mixin.BackBtnDisabled();
+				}
+				
+				.linkBtn{
+					@include mixin.linkBtn();
+				}
+				.linkBtn:hover{
+					@include mixin.linkBtnHover();
+				}
+
+				a{
+					@include mixin.aConfirmCitation();
+				}
+				a:hover{
+					@include mixin.aConfirmCitationHover();
+				}
+				.sendSpan{
+					// Typography
+					text-decoration: none;
+					color: #238600;
+					font-weight: bold;
+				}
+            }
+        }
+    }
+}

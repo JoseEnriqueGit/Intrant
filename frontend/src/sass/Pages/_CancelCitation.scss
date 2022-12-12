@@ -1,0 +1,61 @@
+@use '../util/var' as var;
+@use '../util/mixins' as mixin;
+
+.CancelCitation {
+	@include mixin.form();
+
+    fieldset {
+		@include mixin.fieldset();
+
+        legend {
+			@include mixin.legend();
+		}
+
+        ul {
+			@include mixin.ul();
+            
+            li {
+				@include mixin.li();
+
+                label {
+					@include mixin.label();
+
+					// *Inputs Styles
+					input {
+						@include mixin.input();
+					}
+					input:focus {
+						@include mixin.inputFocus();
+					}
+				}
+
+				// Buttons
+				.NextBtn{
+					@include mixin.NextBtn();
+				}
+				.NextBtn:hover{
+					@include mixin.NextBtnHover();
+				}
+				.NextBtn:disabled{
+					@include mixin.NextBtnDisabled();
+				}
+
+                .BackBtnLink{
+					@include mixin.BackBtnLink();
+                }
+                .BackBtnLink:hover{
+					@include mixin.BackBtnHover();
+				}
+				.BackBtnLink:disabled{
+					@include mixin.BackBtnDisabled();
+				}
+            }
+        }
+    }
+	.Warnig{
+		@include mixin.typeWarnig(var.$Yellow);
+	}
+	.Correct{
+		@include mixin.typeWarnig(var.$Green);
+	}
+}

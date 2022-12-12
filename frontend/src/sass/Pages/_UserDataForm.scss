@@ -1,0 +1,53 @@
+@use '../util/var' as var;
+@use '../util/mixins' as mixin;
+
+.UserDataForm {
+	@include mixin.form();
+
+	fieldset {
+		@include mixin.fieldset();
+
+		legend {
+			@include mixin.legend();
+		}
+
+		ul {
+			@include mixin.ul();
+
+			li {
+				@include mixin.li();
+
+				label {
+					@include mixin.label();
+
+					// *Inputs Styles
+					input {
+						@include mixin.input();
+					}
+					input:focus {
+						@include mixin.inputFocus();
+					}
+				}
+
+				// Buttons
+				.NextBtn{
+					@include mixin.NextBtn();
+				}
+				.NextBtn:hover{
+					@include mixin.NextBtnHover();
+				}
+				.NextBtn:disabled{
+					@include mixin.NextBtnDisabled();
+				}
+
+                a{
+					@include mixin.a();
+                }
+			}
+		}
+	}
+
+	.Warnig{
+		@include mixin.typeWarnig(var.$Yellow);
+	}
+}
