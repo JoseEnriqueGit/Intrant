@@ -17,7 +17,7 @@ import {
 	FormDataContext,
 	PageContext,
 	DataApiContext,
-} from '../../../hooks/contexts';
+} from '../../../hooks';
 import UrlApi from '../../../hooks/useEffects/useDataCedula';
 
 const UserDataForm = () => {
