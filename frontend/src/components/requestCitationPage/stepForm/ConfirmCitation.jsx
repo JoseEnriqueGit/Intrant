@@ -8,32 +8,40 @@ import { faChevronLeft, faHomeAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // Context
 import { FormDataContext, DataApiContext } from '../../../hooks/contexts';
+import axios from 'axios';
 
 const ConfirmCitation = props => {
 	const { formData } = useContext(FormDataContext);
 	const { dataApi } = useContext(DataApiContext);
 	const [isSend, setIsSend] = useState(false);
 
-	function sendData(e) {
+	async function sendData(e) {
 		e.preventDefault();
-		window.localStorage.setItem(dataApi.Cedula, JSON.stringify(formData));
-
-		emailjs
-			.send(
-				'service_ni2w16l',
-				'template_9r54z9a',
-				{ ...formData, ...dataApi },
-				'sbYp-g78-UlihhtUM'
-			)
-			.then(
-				result => {
+		axios
+			.post('http://localhost:4000/new-citation', formData)
+			.then(res => {
+				if (res.status === 201) {
 					setIsSend(true);
-					// console.log(result.text);
-				},
-				error => {
-					console.log(error.text);
+					emailjs
+						.send(
+							'service_ni2w16l',
+							'template_9r54z9a',
+							{ ...formData, ...dataApi },
+							'sbYp-g78-UlihhtUM'
+						)
+						.then(
+							result => {
+								setIsSend(true);
+							},
+							error => {
+								console.log(error.text);
+							}
+						);
 				}
-			);
+			})
+			.catch(error => {
+				console.log(error);
+			});
 	}
 
 	return (
@@ -83,7 +91,7 @@ const ConfirmCitation = props => {
 											size='lg'
 										/>
 									</button>
-									<PDFDownloadLink
+									{/* <PDFDownloadLink
 										className='linkBtn'
 										document={
 											<DatePdf
@@ -101,7 +109,7 @@ const ConfirmCitation = props => {
 										fileName='INTRANT-CITA.pdf'
 									>
 										DESCARGAR
-									</PDFDownloadLink>
+									</PDFDownloadLink> */}
 								</li>
 								<li>
 									<a
