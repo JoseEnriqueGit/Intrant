@@ -2,6 +2,7 @@
 import InputMask from 'react-input-mask';
 import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 // Components
 import { Form, TitleHeader, Button, WarningDiv } from '../../../components';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
@@ -13,28 +14,45 @@ import {
 	DataApiContext,
 	DataInStorageContext,
 } from '../../../hooks/contexts';
-import UrlApi from '../../../hooks/useEffects/useDataCedula';
+import useDataCedula from '../../../hooks/useEffects/useDataCedula';
 
 const ModifyValidation = () => {
 	const { formData, setFormData } = useContext(FormDataContext);
 	const { page, setPage } = useContext(PageContext);
 	const { dataApi } = useContext(DataApiContext);
-	const { setCedula } = useContext(UrlApi);
+	const { setCedula } = useContext(useDataCedula);
 	const { setDataInStorage } = useContext(DataInStorageContext);
 	const [cedulaIsNull, setCedulaIsNull] = useState(false);
 
 	function citationValidation(e) {
 		e.preventDefault();
-		if (JSON.parse(window.localStorage.getItem(dataApi.Cedula)) != null) {
+		axios
+		.get('http://localhost:4000/citation/' + formData.cedula)
+		.then(res => {
+			setFormData(res.data.result)
 			setPage(page + 1);
-			setDataInStorage(
-				JSON.parse(localStorage.getItem(formData.cedula.replaceAll('-', '')))
-			);
-		} else {
-			if (formData.cedula.replaceAll('-', '').length === 11) {
-				setCedulaIsNull(true);
+
+		})
+		.catch(error => {
+			if (error.response.status === 404) {
+				setCedulaIsNull(true)
 			}
-		}
+			else{
+				console.log(error);
+			}
+		});
+
+
+		// if (JSON.parse(window.localStorage.getItem(dataApi.Cedula)) != null) {
+		// 	setPage(page + 1);
+		// 	setDataInStorage(
+		// 		JSON.parse(localStorage.getItem(formData.cedula.replaceAll('-', '')))
+		// 	);
+		// } else {
+		// 	if (formData.cedula.replaceAll('-', '').length === 11) {
+		// 		setCedulaIsNull(true);
+		// 	}
+		// }
 	}
 
 	return (
@@ -53,7 +71,7 @@ const ModifyValidation = () => {
 									name='userCedula'
 									autoComplete='off'
 									mask='999-9999999-9'
-									maskChar=' '
+									maskChar=''
 									autoFocus={true}
 									defaultValue={formData.cedula}
 									onChange={e => {

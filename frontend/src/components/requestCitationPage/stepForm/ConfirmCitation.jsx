@@ -1,5 +1,6 @@
 // Imports
 import { useState, useContext } from 'react';
+import axios from 'axios';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import emailjs from '@emailjs/browser';
 // components
@@ -8,7 +9,6 @@ import { faChevronLeft, faHomeAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // Context
 import { FormDataContext, DataApiContext } from '../../../hooks/contexts';
-import axios from 'axios';
 
 const ConfirmCitation = props => {
 	const { formData } = useContext(FormDataContext);

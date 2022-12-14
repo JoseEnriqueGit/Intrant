@@ -3,6 +3,7 @@ import InputMask from 'react-input-mask';
 import Select from 'react-select';
 import { useContext, useState } from 'react';
 import emailjs from '@emailjs/browser';
+import axios from 'axios';
 // Components
 import {
 	Form,
@@ -52,26 +53,34 @@ const ModifyCitation = props => {
 			setIsNonWorking(true);
 			setIsWeekend(false);
 		} else {
-			window.localStorage.setItem(
-				dataApi.Cedula,
-				JSON.stringify(dataInStorage)
-			);
-			setPage(page - 1);
-			setFormData((formData.cedula = ''));
+			axios
+			.put('http://localhost:4000/modic-citation/' + formData.cedula, formData)
+			.then(res => {
+				if (res.data.result.modifiedCount >= 1 ) {
+					setPage(page - 1);
+					setFormData((formData.cedula = ''));
 
-			emailjs
-				.send(
-					'service_ni2w16l',
-					'template_vv32ofb',
-					dataInStorage,
-					'sbYp-g78-UlihhtUM'
-				)
-				.then(
-					result => {},
-					error => {
-						console.log(error.text);
-					}
-				);
+					emailjs
+					.send(
+						'service_ni2w16l',
+						'template_vv32ofb',
+						formData,
+						'sbYp-g78-UlihhtUM'
+					)
+					.then(
+						result => {},
+						error => {
+							console.log(error.text);
+						}
+					);
+				}
+			})
+			.catch(error => {
+				console.log(error);
+			});
+
+
+
 		}
 	}
 
@@ -91,9 +100,9 @@ const ModifyCitation = props => {
 								name='user_email'
 								autoComplete='off'
 								focus={false}
-								defaultValue={dataInStorage.correo}
+								defaultValue={formData.correo}
 								onChange={e =>
-									setDataInStorage({ ...dataInStorage, correo: e.target.value })
+									setFormData({ ...formData, correo: e.target.value })
 								}
 							/>
 						</li>
@@ -106,10 +115,10 @@ const ModifyCitation = props => {
 									autoComplete='off'
 									mask='+1\(999) 999-9999'
 									maskChar=' '
-									defaultValue={dataInStorage.telefono}
+									defaultValue={formData.telefono}
 									onChange={e => {
-										setDataInStorage({
-											...dataInStorage,
+										setFormData({
+											...formData,
 											telefono: e.target.value,
 										});
 									}}
@@ -132,11 +141,11 @@ const ModifyCitation = props => {
 									options={optionsOficinas}
 									components={'NoOptionsMessage'}
 									value={optionsOficinas.find(
-										obj => obj.value === dataInStorage.oficina
+										obj => obj.value === formData.oficina
 									)}
 									onChange={e =>
-										setDataInStorage({
-											...dataInStorage,
+										setFormData({
+											...formData,
 											oficina: e.value,
 											asunto: '',
 										})
@@ -151,9 +160,9 @@ const ModifyCitation = props => {
 								type='date'
 								name='dateService'
 								min={disableBeforeDays()}
-								defaultValue={dataInStorage.fecha}
+								defaultValue={formData.fecha.slice(0, 10)}
 								onChange={e =>
-									setDataInStorage({ ...dataInStorage, fecha: e.target.value })
+									setFormData({ ...formData, fecha: e.target.value })
 								}
 							/>
 						</li>
@@ -171,16 +180,16 @@ const ModifyCitation = props => {
 									required
 									placeholder={'Seleccione...'}
 									styles={SelectStyle}
-									options={optionService[dataInStorage.oficina]}
+									options={optionService[formData.oficina]}
 									value={
-										dataInStorage.asunto !== ''
+										formData.asunto !== ''
 											? AllServices.find(
-													obj => obj.value === dataInStorage.asunto
+													obj => obj.value === formData.asunto
 											  )
 											: ''
 									}
 									onChange={e =>
-										setDataInStorage({ ...dataInStorage, asunto: e.value })
+										setFormData({ ...formData, asunto: e.value })
 									}
 									components={{ NoOptionsMessage }}
 								/>
@@ -196,10 +205,10 @@ const ModifyCitation = props => {
 									options={optionsTimes}
 									components={'NoOptionsMessage'}
 									value={optionsTimes[0].options.find(
-										obj => obj.value === dataInStorage.hora
+										obj => obj.value === formData.hora
 									)}
 									onChange={e =>
-										setDataInStorage({ ...dataInStorage, hora: e.value })
+										setFormData({ ...formData, hora: e.value })
 									}
 								/>
 							</label>
@@ -216,12 +225,12 @@ const ModifyCitation = props => {
 									size='lg'
 								/>
 							</button>
-							{dataInStorage.correo !== '' &&
-							dataInStorage.telefono !== '' &&
-							dataInStorage.asunto !== '' &&
-							dataInStorage.oficina !== '' &&
-							dataInStorage.fecha !== '' &&
-							dataInStorage.hora !== '' ? (
+							{formData.correo !== '' &&
+							formData.telefono !== '' &&
+							formData.asunto !== '' &&
+							formData.oficina !== '' &&
+							formData.fecha !== '' &&
+							formData.hora !== '' ? (
 								<Button
 									className='NextBtn'
 									content='GUARDAR'
