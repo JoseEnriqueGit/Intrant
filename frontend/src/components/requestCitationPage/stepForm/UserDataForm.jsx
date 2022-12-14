@@ -2,6 +2,7 @@
 import { Link } from 'react-router-dom';
 import { useState, useContext } from 'react';
 import InputMask from 'react-input-mask';
+import axios from 'axios';
 // components
 import {
 	Form,
@@ -29,12 +30,22 @@ const UserDataForm = () => {
 
 	function nextPage(e) {
 		e.preventDefault();
-		if (JSON.parse(window.localStorage.getItem(dataApi.Cedula)) != null) {
-			setHasCitation(true);
-		} else {
-			setHasCitation(false);
-			setPage(page + 1);
-		}
+		axios
+		.get('http://localhost:4000/citation/' + formData.cedula)
+		.then(res => {
+			if (res.status === 200) {
+				setHasCitation(true)
+			}
+		})
+		.catch(error => {
+			if (error.response.status === 404) {
+				setHasCitation(false)
+				setPage(page + 1);
+			}
+			else{
+				console.log(error);
+			}
+		});
 	}
 
 	// Render
