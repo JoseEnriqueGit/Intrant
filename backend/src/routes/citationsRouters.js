@@ -10,7 +10,7 @@ const router = Router();
 
 const WEB_SERVICE = 'https://intrant-api.onrender.com'
 
-router.get('https://intrant-api.onrender.com/all-citations', getAllCitations);
+router.get('/all-citations', getAllCitations);
 
 router.get(`${WEB_SERVICE} /citation/:cedula`, getCitation);
 
