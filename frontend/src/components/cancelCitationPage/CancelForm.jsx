@@ -21,7 +21,7 @@ const CancelForm = props => {
 	function deleteCitation(e) {
 		e.preventDefault();
 		axios
-			.delete('http://localhost:4000/delete-citation/' + formData.cedula)
+			.delete('https://intrant-api.onrender.com/delete-citation/' + formData.cedula)
 			.then(res => {
 				if (res.status === 200 && res.data.result.deletedCount === 1) {
 					setIsDeleted(true);

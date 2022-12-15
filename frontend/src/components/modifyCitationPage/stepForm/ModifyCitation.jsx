@@ -50,7 +50,7 @@ const ModifyCitation = props => {
 			setIsWeekend(false);
 		} else {
 			axios
-			.put('http://localhost:4000/modic-citation/' + formData.cedula, formData)
+			.put('https://intrant-api.onrender.com/modic-citation/' + formData.cedula, formData)
 			.then(res => {
 				if (res.data.result.modifiedCount >= 1 ) {
 					setPage(page - 1);

@@ -25,7 +25,7 @@ const ModifyValidation = () => {
 	function citationValidation(e) {
 		e.preventDefault();
 		axios
-		.get('http://localhost:4000/citation/' + formData.cedula)
+		.get('https://intrant-api.onrender.com/citation/' + formData.cedula)
 		.then(res => {
 			setFormData(res.data.result)
 			setPage(page + 1);

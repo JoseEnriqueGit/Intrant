@@ -31,7 +31,7 @@ const UserDataForm = () => {
 	function nextPage(e) {
 		e.preventDefault();
 		axios
-		.get('http://localhost:4000/citation/' + formData.cedula)
+		.get('https://intrant-api.onrender.com/citation/' + formData.cedula)
 		.then(res => {
 			if (res.status === 200) {
 				setHasCitation(true)

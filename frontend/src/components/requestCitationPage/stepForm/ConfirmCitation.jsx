@@ -17,7 +17,7 @@ const ConfirmCitation = props => {
 	async function sendData(e) {
 		e.preventDefault();
 		axios
-			.post('http://localhost:4000/new-citation', formData)
+			.post('https://intrant-api.onrender.com/new-citation', formData)
 			.then(res => {
 				if (res.status === 201) {
 					setIsSend(true);
