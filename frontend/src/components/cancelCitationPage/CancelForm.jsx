@@ -2,6 +2,7 @@
 import InputMask from 'react-input-mask';
 import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 // Components
 import { Form, TitleHeader, Button, WarningDiv } from '../../components';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
@@ -19,15 +20,20 @@ const CancelForm = props => {
 
 	function deleteCitation(e) {
 		e.preventDefault();
-		if (JSON.parse(window.localStorage.getItem(dataApi.Cedula)) != null) {
-			localStorage.removeItem(dataApi.Cedula);
-			setIsDeleted(true);
-		} else {
-			if (dataApi.Cedula.length === 11) {
-				setCedulaIsNull(true);
-				setIsDeleted(false);
-			}
-		}
+		axios
+			.delete('http://localhost:4000/delete-citation/' + formData.cedula)
+			.then(res => {
+				if (res.status === 200 && res.data.result.deletedCount === 1) {
+					setIsDeleted(true);
+					setCedulaIsNull(false);
+				} else {
+					setIsDeleted(false);
+					setCedulaIsNull(true);
+				}
+			})
+			.catch(error => {
+				console.log(error);
+			});
 	}
 
 	return (
@@ -85,11 +91,13 @@ const CancelForm = props => {
 						</li>
 					</ul>
 				</fieldset>
-				{isDeleted && (
+				{isDeleted ? (
 					<WarningDiv
 						className='Correct'
 						textContent='CITA CANCELADA CORRECTAMENTE'
 					/>
+				) : (
+					<></>
 				)}
 				{cedulaIsNull && (
 					<WarningDiv
