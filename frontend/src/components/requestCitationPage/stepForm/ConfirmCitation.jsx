@@ -1,10 +1,9 @@
 // Imports
 import { useState, useContext } from 'react';
 import axios from 'axios';
-import { PDFDownloadLink } from '@react-pdf/renderer';
 import emailjs from '@emailjs/browser';
 // components
-import { Form, TitleHeader, Button, DatePdf } from '../../../components';
+import { Form, TitleHeader, Button } from '../../../components';
 import { faChevronLeft, faHomeAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // Context
@@ -91,25 +90,6 @@ const ConfirmCitation = props => {
 											size='lg'
 										/>
 									</button>
-									{/* <PDFDownloadLink
-										className='linkBtn'
-										document={
-											<DatePdf
-												Nombres={dataApi.Nombres}
-												Apellido1={dataApi.Apellido1}
-												Apellido2={dataApi.Apellido2}
-												asunto={formData.asunto}
-												oficina={formData.oficina}
-												fecha={formData.fecha}
-												hora={formData.hora}
-												telefono={formData.telefono}
-												correo={formData.correo}
-											/>
-										}
-										fileName='INTRANT-CITA.pdf'
-									>
-										DESCARGAR
-									</PDFDownloadLink> */}
 								</li>
 								<li>
 									<a
