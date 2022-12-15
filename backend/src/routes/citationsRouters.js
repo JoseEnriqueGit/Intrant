@@ -8,14 +8,16 @@ import {
 } from "../controllers/citationController.js";
 const router = Router();
 
-router.get("/all-citations", getAllCitations);
+const WEB_SERVICE = 'https://intrant-api.onrender.com'
 
-router.get("/citation/:cedula", getCitation);
+router.get(`${WEB_SERVICE} /all-citations`, getAllCitations);
 
-router.post("/new-citation", newCitation);
+router.get(`${WEB_SERVICE} /citation/:cedula`, getCitation);
 
-router.put("/modic-citation/:cedula", modicCitation);
+router.post(`${WEB_SERVICE} /new-citation`, newCitation);
 
-router.delete("/delete-citation/:cedula", deleteCitation);
+router.put(`${WEB_SERVICE} /modic-citation/:cedula`, modicCitation);
+
+router.delete(`${WEB_SERVICE} /delete-citation/:cedula`, deleteCitation);
 
 export default router;
