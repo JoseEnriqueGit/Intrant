@@ -7,6 +7,5 @@ export { default as WarningDiv } from './WarningDiv';
 export * from './cancelCitationPage';
 export * from './modifyCitationPage';
 export * from './modifyCitationPage/stepForm';
-export * from './outPut';
 export * from './requestCitationPage';
 export * from './requestCitationPage/stepForm';

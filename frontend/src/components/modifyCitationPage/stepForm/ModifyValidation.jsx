@@ -12,7 +12,6 @@ import {
 	FormDataContext,
 	PageContext,
 	DataApiContext,
-	DataInStorageContext,
 } from '../../../hooks/contexts';
 import useDataCedula from '../../../hooks/useEffects/useDataCedula';
 
@@ -21,7 +20,6 @@ const ModifyValidation = () => {
 	const { page, setPage } = useContext(PageContext);
 	const { dataApi } = useContext(DataApiContext);
 	const { setCedula } = useContext(useDataCedula);
-	const { setDataInStorage } = useContext(DataInStorageContext);
 	const [cedulaIsNull, setCedulaIsNull] = useState(false);
 
 	function citationValidation(e) {
@@ -41,18 +39,6 @@ const ModifyValidation = () => {
 				console.log(error);
 			}
 		});
-
-
-		// if (JSON.parse(window.localStorage.getItem(dataApi.Cedula)) != null) {
-		// 	setPage(page + 1);
-		// 	setDataInStorage(
-		// 		JSON.parse(localStorage.getItem(formData.cedula.replaceAll('-', '')))
-		// 	);
-		// } else {
-		// 	if (formData.cedula.replaceAll('-', '').length === 11) {
-		// 		setCedulaIsNull(true);
-		// 	}
-		// }
 	}
 
 	return (

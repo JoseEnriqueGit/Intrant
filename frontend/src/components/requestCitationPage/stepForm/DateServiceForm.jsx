@@ -23,7 +23,7 @@ import {
 	optionService,
 	optionsOficinas,
 	optionsTimes,
-} from '../../InputsTypes/select/option.js';
+} from '../../InputsTypes';
 
 const DateServiceForm = props => {
 	const { formData, setFormData } = useContext(FormDataContext);

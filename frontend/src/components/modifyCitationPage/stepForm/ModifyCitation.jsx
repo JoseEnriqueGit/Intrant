@@ -20,8 +20,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
 	FormDataContext,
 	PageContext,
-	DataApiContext,
-	DataInStorageContext,
 } from '../../../hooks/contexts';
 // Logic
 import { disableBeforeDays, isWorkingDay } from '../../../logic/date.js';
@@ -31,13 +29,11 @@ import {
 	optionService,
 	optionsOficinas,
 	optionsTimes,
-} from '../../InputsTypes/select/option.js';
+} from '../../InputsTypes';
 
 const ModifyCitation = props => {
 	const { formData, setFormData } = useContext(FormDataContext);
 	const { page, setPage } = useContext(PageContext);
-	const { dataApi } = useContext(DataApiContext);
-	const { dataInStorage, setDataInStorage } = useContext(DataInStorageContext);
 	const [isNonWorking, setIsNonWorking] = useState(false);
 	const [isWeekend, setIsWeekend] = useState(false);
 
