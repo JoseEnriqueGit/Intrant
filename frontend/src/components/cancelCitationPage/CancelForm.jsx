@@ -52,7 +52,7 @@ const CancelForm = props => {
 									name='userCedula'
 									autoComplete='off'
 									mask='999-9999999-9'
-									maskChar=' '
+									maskChar=''
 									autoFocus={true}
 									defaultValue={formData.cedula}
 									onChange={e => {
