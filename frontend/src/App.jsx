@@ -7,7 +7,7 @@ import {
 	MultiStepsForm,
 	MultiStepsModifyCitation,
 	CancelForm,
-} from './components';
+} from './pagesComponents';
 
 function App() {
 	return (

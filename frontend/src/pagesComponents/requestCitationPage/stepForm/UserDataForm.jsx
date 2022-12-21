@@ -2,7 +2,7 @@
 import { Link } from 'react-router-dom';
 import { useState, useContext } from 'react';
 import InputMask from 'react-input-mask';
-import axios from 'axios';
+import { existCitation } from '../../../api/existCitation';
 // components
 import {
 	Form,
@@ -11,14 +11,10 @@ import {
 	Input,
 	OutPut,
 	WarningDiv,
-} from '../../../components';
+} from '../../../pagesComponents';
 import { bornDateUser } from '../../../logic/date';
 // context
-import {
-	FormDataContext,
-	PageContext,
-	DataApiContext,
-} from '../../../hooks';
+import { FormDataContext, PageContext, DataApiContext } from '../../../hooks';
 import UrlApi from '../../../hooks/useEffects/useDataCedula';
 
 const UserDataForm = () => {
@@ -28,31 +24,16 @@ const UserDataForm = () => {
 	const { setCedula } = useContext(UrlApi);
 	const [hasCitation, setHasCitation] = useState(false);
 
-	function nextPage(e) {
+	async function handleNextPage(e) {
 		e.preventDefault();
-		axios
-		.get('https://intrant-api.onrender.com/citation/' + formData.cedula)
-		.then(res => {
-			if (res.status === 200) {
-				setHasCitation(true)
-			}
-		})
-		.catch(error => {
-			if (error.response.status === 404) {
-				setHasCitation(false)
-				setPage(page + 1);
-			}
-			else{
-				console.log(error);
-			}
-		});
+		await existCitation(formData.cedula) ? setHasCitation(true) : setPage(page + 1);
 	}
 
 	// Render
 	return (
 		<>
 			<TitleHeader text='CITA PARA EL SERVICIO' />
-			<Form className='UserDataForm' onSubmit={nextPage}>
+			<Form className='UserDataForm' onSubmit={handleNextPage}>
 				<fieldset lang='es'>
 					<legend>DATOS DEL VISITANTE</legend>
 
