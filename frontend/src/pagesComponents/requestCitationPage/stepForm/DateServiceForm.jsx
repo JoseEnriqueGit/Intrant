@@ -10,7 +10,7 @@ import {
 	NoOptionsMessage,
 	WarningDiv,
 	SelectStyle,
-} from '../../../components';
+} from '../../../pagesComponents';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // Context
