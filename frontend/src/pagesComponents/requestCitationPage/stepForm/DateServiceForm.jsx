@@ -31,7 +31,7 @@ const DateServiceForm = props => {
 	const [isNonWorking, setIsNonWorking] = useState(false);
 	const [isWeekend, setIsWeekend] = useState(false);
 
-	function datePickerValidation(e) {
+	function handleDatePickerValidation(e) {
 		e.preventDefault();
 
 		const date = new Date(document.getElementById('dateService').value);
@@ -51,7 +51,7 @@ const DateServiceForm = props => {
 	return (
 		<>
 			<TitleHeader text='CONFIGURAR CITA ' />
-			<Form className='FormDateService' onSubmit={datePickerValidation}>
+			<Form className='FormDateService' onSubmit={handleDatePickerValidation}>
 				<fieldset lang='es'>
 					<legend>LUGAR DEL SERVICIO</legend>
 
