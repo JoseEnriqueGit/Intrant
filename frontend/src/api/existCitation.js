@@ -4,13 +4,13 @@ import axios from 'axios';
 export const existCitation = async cedula => {
 	const res = await axios.get('https://intrant-api.onrender.com/all-citations');
 
-	const existCitation = res.data.result.filter(
+	const existCitation = res.data.result.find(
 		element => element.cedula === cedula
 	);
 
-	if (existCitation.length === 0) {
+	if (!existCitation) {
 		return false;
 	} else {
-		return true;
+		return { isExist: true, getCitation: existCitation};
 	}
 };
