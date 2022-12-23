@@ -4,7 +4,7 @@ import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 // Components
-import { Form, TitleHeader, Button, WarningDiv } from '../../components';
+import { Form, TitleHeader, Button, WarningDiv } from '../../pagesComponents';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // Context
