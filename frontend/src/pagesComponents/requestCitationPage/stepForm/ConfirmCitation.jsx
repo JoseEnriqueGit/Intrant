@@ -1,13 +1,13 @@
 // Imports
 import { useState, useContext } from 'react';
-import axios from 'axios';
-import emailjs from '@emailjs/browser';
+import { createCitation } from '../../../api/createCitations';
 // components
-import { Form, TitleHeader, Button } from '../../../components';
+import { Form, TitleHeader, Button } from '../../../pagesComponents';
 import { faChevronLeft, faHomeAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // Context
 import { FormDataContext, DataApiContext } from '../../../hooks/contexts';
+import { sendEmail } from '../../../logic/sendEmail';
 
 const ConfirmCitation = props => {
 	const { formData } = useContext(FormDataContext);
@@ -16,31 +16,14 @@ const ConfirmCitation = props => {
 
 	async function sendData(e) {
 		e.preventDefault();
-		axios
-			.post('https://intrant-api.onrender.com/new-citation', formData)
-			.then(res => {
-				if (res.status === 201) {
-					setIsSend(true);
-					emailjs
-						.send(
-							'service_ni2w16l',
-							'template_9r54z9a',
-							{ ...formData, ...dataApi },
-							'sbYp-g78-UlihhtUM'
-						)
-						.then(
-							result => {
-								setIsSend(true);
-							},
-							error => {
-								console.log(error.text);
-							}
-						);
-				}
-			})
-			.catch(error => {
-				console.log(error);
-			});
+
+		if(createCitation(formData)){
+			sendEmail(formData, dataApi);
+			setIsSend(true);
+		}
+		else{
+			setIsSend(false)
+		}
 	}
 
 	return (
