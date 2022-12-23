@@ -2,9 +2,14 @@
 import InputMask from 'react-input-mask';
 import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { existCitation } from '../../../api/existCitation';
 // Components
-import { Form, TitleHeader, Button, WarningDiv } from '../../../components';
+import {
+	Form,
+	TitleHeader,
+	Button,
+	WarningDiv,
+} from '../../../pagesComponents';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // Context
@@ -20,25 +25,18 @@ const ModifyValidation = () => {
 	const { page, setPage } = useContext(PageContext);
 	const { dataApi } = useContext(DataApiContext);
 	const { setCedula } = useContext(useDataCedula);
-	const [cedulaIsNull, setCedulaIsNull] = useState(false);
+	const [hasCitation, setHasCitation] = useState(true);
 
-	function citationValidation(e) {
+	async function citationValidation(e) {
 		e.preventDefault();
-		axios
-		.get('https://intrant-api.onrender.com/citation/' + formData.cedula)
-		.then(res => {
-			setFormData(res.data.result)
+		const { isExist, getCitation } = await existCitation(formData.cedula);
+		console.log(getCitation);
+		if (isExist) {
+			setFormData(getCitation);
 			setPage(page + 1);
-
-		})
-		.catch(error => {
-			if (error.response.status === 404) {
-				setCedulaIsNull(true)
-			}
-			else{
-				console.log(error);
-			}
-		});
+		} else {
+			setHasCitation(false);
+		}
 	}
 
 	return (
@@ -66,7 +64,7 @@ const ModifyValidation = () => {
 											...formData,
 											cedula: e.target.value,
 										});
-										setCedulaIsNull(false);
+										setHasCitation(true);
 									}}
 								></InputMask>
 							</label>
@@ -96,7 +94,7 @@ const ModifyValidation = () => {
 						</li>
 					</ul>
 				</fieldset>
-				{cedulaIsNull && (
+				{!hasCitation && (
 					<WarningDiv
 						className='Warnig'
 						textContent='USTED NO TIENE NINGUNA CITA'

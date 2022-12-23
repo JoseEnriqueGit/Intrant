@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { useState, useContext } from 'react';
 import InputMask from 'react-input-mask';
 import { existCitation } from '../../../api/existCitation';
+import { sliceDash } from '../../../logic/sliceDash'
+import { bornDateUser } from '../../../logic/date';
 // components
 import {
 	Form,
@@ -12,7 +14,6 @@ import {
 	OutPut,
 	WarningDiv,
 } from '../../../pagesComponents';
-import { bornDateUser } from '../../../logic/date';
 // context
 import { FormDataContext, PageContext, DataApiContext } from '../../../hooks';
 import UrlApi from '../../../hooks/useEffects/useDataCedula';
@@ -26,7 +27,8 @@ const UserDataForm = () => {
 
 	async function handleNextPage(e) {
 		e.preventDefault();
-		await existCitation(formData.cedula) ? setHasCitation(true) : setPage(page + 1);
+		const  isExist = await existCitation(formData.cedula);
+		isExist ? setHasCitation(true) : setPage(page + 1);
 	}
 
 	// Render
@@ -51,7 +53,7 @@ const UserDataForm = () => {
 									defaultValue={formData.cedula}
 									onChange={e => {
 										setHasCitation(false);
-										setCedula(e.target.value.replaceAll('-', ''));
+										setCedula(sliceDash(e.target.value));
 										setFormData({
 											...formData,
 											cedula: e.target.value,
