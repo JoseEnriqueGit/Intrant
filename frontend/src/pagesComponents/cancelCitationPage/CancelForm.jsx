@@ -2,7 +2,7 @@
 import InputMask from 'react-input-mask';
 import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { deleteCitation } from '../../api/deleteCitation';
 // Components
 import { Form, TitleHeader, Button, WarningDiv } from '../../pagesComponents';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
@@ -11,35 +11,29 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FormDataContext, DataApiContext } from '../../hooks/contexts';
 import UrlApi from '../../hooks/useEffects/useDataCedula';
 
-const CancelForm = props => {
+const CancelForm = () => {
 	const { formData, setFormData } = useContext(FormDataContext);
 	const { dataApi } = useContext(DataApiContext);
 	const { setCedula } = useContext(UrlApi);
-	const [cedulaIsNull, setCedulaIsNull] = useState(false);
+	const [hasCitation, setHasCitation] = useState(false);
 	const [isDeleted, setIsDeleted] = useState(false);
 
-	function deleteCitation(e) {
+	function handleDeleteCitation(e) {
 		e.preventDefault();
-		axios
-			.delete('https://intrant-api.onrender.com/delete-citation/' + formData.cedula)
-			.then(res => {
-				if (res.status === 200 && res.data.result.deletedCount === 1) {
-					setIsDeleted(true);
-					setCedulaIsNull(false);
-				} else {
-					setIsDeleted(false);
-					setCedulaIsNull(true);
-				}
-			})
-			.catch(error => {
-				console.log(error);
-			});
+		if (deleteCitation(formData.cedula)){
+			setIsDeleted(true);
+			setHasCitation(false);
+		}
+		else{
+			setIsDeleted(false);
+			setHasCitation(true)
+		}
 	}
 
 	return (
 		<>
 			<TitleHeader text='CANCELAR CITA' />
-			<Form className='CancelCitation' onSubmit={deleteCitation}>
+			<Form className='CancelCitation' onSubmit={handleDeleteCitation}>
 				<fieldset lang='es'>
 					<legend>DATO DEL VISITANTE</legend>
 
@@ -61,7 +55,7 @@ const CancelForm = props => {
 											...formData,
 											cedula: e.target.value,
 										});
-										setCedulaIsNull(false);
+										setHasCitation(false);
 									}}
 								></InputMask>
 							</label>
@@ -99,7 +93,7 @@ const CancelForm = props => {
 				) : (
 					<></>
 				)}
-				{cedulaIsNull && (
+				{hasCitation && (
 					<WarningDiv
 						className='Warnig'
 						textContent='USTED NO TIENE NINGUNA CITA PARA CANCELAR'

@@ -14,6 +14,7 @@ const MultiStepsForm = () => {
 
 	function submitBack(e) {
 		e.preventDefault();
+		setFormData({})
 		setPage(page - 1);
 	}
 

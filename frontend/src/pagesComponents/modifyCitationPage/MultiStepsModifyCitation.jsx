@@ -3,16 +3,18 @@ import { useContext } from 'react';
 // components
 import { ModifyValidation, ModifyCitation } from './stepForm';
 // Context
-import PageContext from '../../hooks/contexts/PageContext';
+import {PageContext, FormDataContext} from '../../hooks/contexts';
 
 export const MultiStepsModifyCitation = () => {
 	const { page, setPage } = useContext(PageContext);
+	const { setFormData } = useContext(FormDataContext);
 	function nextGetData(e) {
 		e.preventDefault();
 		setPage(page + 1);
 	}
 	function submitBack(e) {
 		e.preventDefault();
+		setFormData({})
 		setPage(page - 1);
 	}
 

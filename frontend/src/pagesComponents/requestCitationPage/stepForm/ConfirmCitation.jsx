@@ -14,11 +14,11 @@ const ConfirmCitation = props => {
 	const { dataApi } = useContext(DataApiContext);
 	const [isSend, setIsSend] = useState(false);
 
-	async function sendData(e) {
+	async function handleSendData(e) {
 		e.preventDefault();
 
 		if(createCitation(formData)){
-			sendEmail(formData, dataApi);
+			sendEmail(formData, dataApi, 'template_9r54z9a');
 			setIsSend(true);
 		}
 		else{
@@ -29,7 +29,7 @@ const ConfirmCitation = props => {
 	return (
 		<>
 			<TitleHeader text='CONFIRMAR CITA' />
-			<Form onSubmit={sendData} className='FormConfirmCitation'>
+			<Form onSubmit={handleSendData} className='FormConfirmCitation'>
 				<fieldset lang='es'>
 					<legend>
 						CITA DE {dataApi.Nombres} {dataApi.Apellido1} {dataApi.Apellido2}

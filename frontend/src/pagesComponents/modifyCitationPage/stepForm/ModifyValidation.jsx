@@ -20,17 +20,16 @@ import {
 } from '../../../hooks/contexts';
 import useDataCedula from '../../../hooks/useEffects/useDataCedula';
 
-const ModifyValidation = () => {
+ const ModifyValidation = () => {
 	const { formData, setFormData } = useContext(FormDataContext);
 	const { page, setPage } = useContext(PageContext);
 	const { dataApi } = useContext(DataApiContext);
 	const { setCedula } = useContext(useDataCedula);
 	const [hasCitation, setHasCitation] = useState(true);
 
-	async function citationValidation(e) {
+	async function handleCitationValidation(e) {
 		e.preventDefault();
 		const { isExist, getCitation } = await existCitation(formData.cedula);
-		console.log(getCitation);
 		if (isExist) {
 			setFormData(getCitation);
 			setPage(page + 1);
@@ -42,7 +41,7 @@ const ModifyValidation = () => {
 	return (
 		<>
 			<TitleHeader text='CONFIGURAR CITA ' />
-			<Form className='ModifyCitationForm' onSubmit={citationValidation}>
+			<Form className='ModifyCitationForm' onSubmit={handleCitationValidation}>
 				<fieldset lang='es'>
 					<legend>DATO DEL VISITANTE</legend>
 
@@ -77,7 +76,7 @@ const ModifyValidation = () => {
 									size='lg'
 								/>
 							</Link>
-							{dataApi.ok ? (
+							{dataApi.ok && formData.cedula !== '' ? (
 								<Button
 									className='NextBtn'
 									content='SIGUIENTE'

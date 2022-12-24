@@ -2,8 +2,8 @@
 import InputMask from 'react-input-mask';
 import Select from 'react-select';
 import { useContext, useState } from 'react';
-import emailjs from '@emailjs/browser';
-import axios from 'axios';
+import { modifyCitation } from '../../../api/modifyCitation';
+import { sendEmail } from '../../../logic/sendEmail';
 // Components
 import {
 	Form,
@@ -17,10 +17,7 @@ import {
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // Context
-import {
-	FormDataContext,
-	PageContext,
-} from '../../../hooks/contexts';
+import { FormDataContext, PageContext } from '../../../hooks/contexts';
 // Logic
 import { disableBeforeDays, isWorkingDay } from '../../../logic/date.js';
 // Options Imports
@@ -37,7 +34,7 @@ const ModifyCitation = props => {
 	const [isNonWorking, setIsNonWorking] = useState(false);
 	const [isWeekend, setIsWeekend] = useState(false);
 
-	function changeCitation(e) {
+	function handleChangeCitation(e) {
 		e.preventDefault();
 		const date = new Date(document.getElementById('dateService').value);
 		const { isWeekend, isHolyday } = isWorkingDay(date);
@@ -49,41 +46,18 @@ const ModifyCitation = props => {
 			setIsNonWorking(true);
 			setIsWeekend(false);
 		} else {
-			axios
-			.put('https://intrant-api.onrender.com/modic-citation/' + formData.cedula, formData)
-			.then(res => {
-				if (res.data.result.modifiedCount >= 1 ) {
-					setPage(page - 1);
-					setFormData((formData.cedula = ''));
-
-					emailjs
-					.send(
-						'service_ni2w16l',
-						'template_vv32ofb',
-						formData,
-						'sbYp-g78-UlihhtUM'
-					)
-					.then(
-						result => {},
-						error => {
-							console.log(error.text);
-						}
-					);
-				}
-			})
-			.catch(error => {
-				console.log(error);
-			});
-
-
-
+			if(modifyCitation(formData.cedula, formData)){
+				setPage(page - 1);
+				sendEmail(formData, null, 'template_vv32ofb')
+				setFormData((formData.cedula = ''));
+			}
 		}
 	}
 
 	return (
 		<>
 			<TitleHeader text='CONFIGURAR CITA' />
-			<Form className='ModifyCitationForm' onSubmit={changeCitation}>
+			<Form className='ModifyCitationForm' onSubmit={handleChangeCitation}>
 				<fieldset lang='es'>
 					<legend>Cambiar Datos</legend>
 
@@ -179,14 +153,10 @@ const ModifyCitation = props => {
 									options={optionService[formData.oficina]}
 									value={
 										formData.asunto !== ''
-											? AllServices.find(
-													obj => obj.value === formData.asunto
-											  )
+											? AllServices.find(obj => obj.value === formData.asunto)
 											: ''
 									}
-									onChange={e =>
-										setFormData({ ...formData, asunto: e.value })
-									}
+									onChange={e => setFormData({ ...formData, asunto: e.value })}
 									components={{ NoOptionsMessage }}
 								/>
 							</label>
@@ -203,9 +173,7 @@ const ModifyCitation = props => {
 									value={optionsTimes[0].options.find(
 										obj => obj.value === formData.hora
 									)}
-									onChange={e =>
-										setFormData({ ...formData, hora: e.value })
-									}
+									onChange={e => setFormData({ ...formData, hora: e.value })}
 								/>
 							</label>
 						</li>
