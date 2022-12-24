@@ -1,7 +1,7 @@
 // 'https://api.adamix.net/apec/cedula/00100782788'
 // 00112851662
-// 01100276250
 // 402-4215106-2
+// 01100276250
 export const disableBeforeDays = () => {
 	const today = new Date();
 	const format = new Date(today.getTime()).toISOString();

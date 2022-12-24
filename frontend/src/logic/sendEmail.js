@@ -1,10 +1,13 @@
 import emailjs from '@emailjs/browser';
 
-export const sendEmail = async (formData, dataApi) => {
+// Citation created 'template_9r54z9a'
+// Citation modified 'template_vv32ofb'
+
+export const sendEmail = async (formData, dataApi, template) => {
     emailjs
     .send(
         'service_ni2w16l',
-        'template_9r54z9a',
+        template,
         { ...formData, ...dataApi },
         'sbYp-g78-UlihhtUM'
     )
