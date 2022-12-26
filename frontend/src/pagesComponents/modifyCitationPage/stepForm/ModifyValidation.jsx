@@ -20,7 +20,7 @@ import {
 } from '../../../hooks/contexts';
 import useDataCedula from '../../../hooks/useEffects/useDataCedula';
 
- const ModifyValidation = () => {
+const ModifyValidation = () => {
 	const { formData, setFormData } = useContext(FormDataContext);
 	const { page, setPage } = useContext(PageContext);
 	const { dataApi } = useContext(DataApiContext);
@@ -76,7 +76,7 @@ import useDataCedula from '../../../hooks/useEffects/useDataCedula';
 									size='lg'
 								/>
 							</Link>
-							{dataApi.ok && formData.cedula !== '' ? (
+							{dataApi.ok && formData.cedula !== undefined ? (
 								<Button
 									className='NextBtn'
 									content='SIGUIENTE'

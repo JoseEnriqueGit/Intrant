@@ -49,7 +49,7 @@ const ModifyCitation = props => {
 			if(modifyCitation(formData.cedula, formData)){
 				setPage(page - 1);
 				sendEmail(formData, null, 'template_vv32ofb')
-				setFormData((formData.cedula = ''));
+				setFormData({});
 			}
 		}
 	}
