@@ -18,9 +18,11 @@ const CancelForm = () => {
 	const [hasCitation, setHasCitation] = useState(false);
 	const [isDeleted, setIsDeleted] = useState(false);
 
-	function handleDeleteCitation(e) {
+	async function handleDeleteCitation(e) {
 		e.preventDefault();
-		if (deleteCitation(formData.cedula)){
+		const isDeleted = await deleteCitation(formData.cedula)
+		
+		if (isDeleted){
 			setIsDeleted(true);
 			setHasCitation(false);
 		}
