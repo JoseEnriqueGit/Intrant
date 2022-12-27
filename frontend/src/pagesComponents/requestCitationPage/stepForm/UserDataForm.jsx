@@ -27,7 +27,7 @@ const UserDataForm = () => {
 
 	async function handleNextPage(e) {
 		e.preventDefault();
-		const  isExist = await existCitation(formData.cedula);
+		const isExist = await existCitation(formData.cedula);
 		isExist ? setHasCitation(true) : setPage(page + 1);
 	}
 
