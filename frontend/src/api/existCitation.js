@@ -11,6 +11,6 @@ export const existCitation = async cedula => {
 	if (!existCitation) {
 		return false;
 	} else {
-		return { isExist: true, getCitation: existCitation};
+		return { isExist: true, getCitation: existCitation };
 	}
 };

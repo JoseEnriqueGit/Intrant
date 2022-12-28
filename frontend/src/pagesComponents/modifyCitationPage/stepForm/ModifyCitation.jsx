@@ -33,11 +33,13 @@ const ModifyCitation = props => {
 	const { page, setPage } = useContext(PageContext);
 	const [isNonWorking, setIsNonWorking] = useState(false);
 	const [isWeekend, setIsWeekend] = useState(false);
+	const [isModify, setIsModify] = useState(true);
 
-	function handleChangeCitation(e) {
+	async function handleChangeCitation(e) {
 		e.preventDefault();
 		const date = new Date(document.getElementById('dateService').value);
 		const { isWeekend, isHolyday } = isWorkingDay(date);
+		const isModify = await modifyCitation(formData.cedula, formData);
 
 		if (isWeekend) {
 			setIsWeekend(true);
@@ -46,10 +48,13 @@ const ModifyCitation = props => {
 			setIsNonWorking(true);
 			setIsWeekend(false);
 		} else {
-			if(modifyCitation(formData.cedula, formData)){
+			if (isModify) {
 				setPage(page - 1);
-				sendEmail(formData, null, 'template_vv32ofb')
+				sendEmail(formData, null, 'template_vv32ofb');
 				setFormData({});
+			}
+			else{
+				setIsModify(false)
 			}
 		}
 	}
@@ -218,6 +223,12 @@ const ModifyCitation = props => {
 					<WarningDiv
 						className='Warnig'
 						textContent='EL DIA SELECCIONADO ES FERIADO'
+					/>
+				)}
+				{!isModify && (
+					<WarningDiv
+						className='Warnig'
+						textContent='NO SE HA DECTETADO CAMBIOS'
 					/>
 				)}
 			</Form>
