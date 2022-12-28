@@ -3,11 +3,12 @@ import { useContext } from 'react';
 // components
 import { UserDataForm, DateServiceForm, ConfirmCitation } from './stepForm';
 // Context
-import { FormDataContext, PageContext } from '../../hooks/contexts';
+import { FormDataContext, PageContext, DataApiContext } from '../../hooks/contexts';
 
 const MultiStepsForm = () => {
 	const { setFormData } = useContext(FormDataContext);
 	const { page, setPage } = useContext(PageContext);
+	const { setDataApi } = useContext(DataApiContext);
 	// !
 	// console.log(formData);
 
@@ -19,6 +20,7 @@ const MultiStepsForm = () => {
 	function backHome(e) {
 		e.preventDefault();
 		setFormData({});
+		setDataApi({})
 		setPage(1);
 	}
 

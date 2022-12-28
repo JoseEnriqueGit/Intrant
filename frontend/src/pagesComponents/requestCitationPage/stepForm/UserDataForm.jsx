@@ -21,7 +21,7 @@ import UrlApi from '../../../hooks/useEffects/useDataCedula';
 const UserDataForm = () => {
 	const { formData, setFormData } = useContext(FormDataContext);
 	const { page, setPage } = useContext(PageContext);
-	const { dataApi } = useContext(DataApiContext);
+	const { dataApi, setDataApi } = useContext(DataApiContext);
 	const { setCedula } = useContext(UrlApi);
 	const [hasCitation, setHasCitation] = useState(false);
 
@@ -58,6 +58,7 @@ const UserDataForm = () => {
 											...formData,
 											cedula: e.target.value,
 										});
+										setDataApi({})
 									}}
 								></InputMask>
 							</label>

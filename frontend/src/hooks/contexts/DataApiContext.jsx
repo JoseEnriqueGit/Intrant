@@ -3,7 +3,7 @@ import { useState, createContext } from "react";
 const DataApiContext = createContext();
 
 export const DataApiContextProvider = props => {
-    const [dataApi, setDataApi] = useState([]);
+    const [dataApi, setDataApi] = useState({});
 
     return (
         <DataApiContext.Provider value={{dataApi, setDataApi}}>

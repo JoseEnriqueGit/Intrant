@@ -17,7 +17,7 @@ import {
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // Context
-import { FormDataContext, PageContext } from '../../../hooks/contexts';
+import { FormDataContext, PageContext, DataApiContext } from '../../../hooks/contexts';
 // Logic
 import { disableBeforeDays, isWorkingDay } from '../../../logic/date.js';
 // Options Imports
@@ -30,6 +30,7 @@ import {
 
 const ModifyCitation = props => {
 	const { formData, setFormData } = useContext(FormDataContext);
+	const { setDataApi } = useContext(DataApiContext);
 	const { page, setPage } = useContext(PageContext);
 	const [isNonWorking, setIsNonWorking] = useState(false);
 	const [isWeekend, setIsWeekend] = useState(false);
@@ -52,6 +53,7 @@ const ModifyCitation = props => {
 				setPage(page - 1);
 				sendEmail(formData, null, 'template_vv32ofb');
 				setFormData({});
+				setDataApi({})
 			}
 			else{
 				setIsModify(false)
