@@ -5,8 +5,11 @@ import {
 	newCitation,
 	modicCitation,
 	deleteCitation,
+	run,
 } from "../controllers/citationController.js";
 const router = Router();
+
+router.get('/', run);
 
 router.get('/all-citations', getAllCitations);
 

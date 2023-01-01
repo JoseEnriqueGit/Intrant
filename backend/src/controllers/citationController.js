@@ -1,5 +1,9 @@
 import Citation from "../models/CitationModel.js";
 
+export const run = async (req, res) => {
+	console.log('running...');
+};
+
 export const getAllCitations = async (req, res) => {
 	try {
 		const result = await Citation.find();
