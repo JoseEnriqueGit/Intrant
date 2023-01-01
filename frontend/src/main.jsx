@@ -5,18 +5,21 @@ import { BrowserRouter } from 'react-router-dom';
 import { FormDataContextProvider } from './hooks/contexts/FormDataContext';
 import { DataApiContextProvider } from './hooks/contexts/DataApiContext';
 import { PageContextProvider } from './hooks/contexts/PageContext';
+import { LoadingContextProvider } from './hooks/contexts/Loading';
 import { UrlApiProvider } from './hooks/useEffects/useDataCedula';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
 	<PageContextProvider>
-		<DataApiContextProvider>
-			<FormDataContextProvider>
-				<UrlApiProvider>
-					<BrowserRouter>
-						<App />
-					</BrowserRouter>
-				</UrlApiProvider>
-			</FormDataContextProvider>
-		</DataApiContextProvider>
+		<LoadingContextProvider>
+			<DataApiContextProvider>
+				<FormDataContextProvider>
+					<UrlApiProvider>
+						<BrowserRouter>
+							<App />
+						</BrowserRouter>
+					</UrlApiProvider>
+				</FormDataContextProvider>
+			</DataApiContextProvider>
+		</LoadingContextProvider>
 	</PageContextProvider>
 );

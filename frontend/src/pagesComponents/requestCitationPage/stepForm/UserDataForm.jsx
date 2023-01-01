@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 import { useState, useContext } from 'react';
 import InputMask from 'react-input-mask';
 import { existCitation } from '../../../api/existCitation';
-import { sliceDash } from '../../../logic/sliceDash'
+import { sliceDash } from '../../../logic/sliceDash';
 import { bornDateUser } from '../../../logic/date';
 // components
+import { Ring } from '@uiball/loaders';
 import {
 	Form,
 	TitleHeader,
@@ -15,20 +16,35 @@ import {
 	WarningDiv,
 } from '../../../pagesComponents';
 // context
-import { FormDataContext, PageContext, DataApiContext } from '../../../hooks';
+import {
+	FormDataContext,
+	PageContext,
+	DataApiContext,
+	Loading,
+} from '../../../hooks';
 import UrlApi from '../../../hooks/useEffects/useDataCedula';
 
 const UserDataForm = () => {
 	const { formData, setFormData } = useContext(FormDataContext);
 	const { page, setPage } = useContext(PageContext);
 	const { dataApi, setDataApi } = useContext(DataApiContext);
+	const { isLoading, setIsLoading } = useContext(Loading);
 	const { setCedula } = useContext(UrlApi);
 	const [hasCitation, setHasCitation] = useState(false);
 
 	async function handleNextPage(e) {
 		e.preventDefault();
+		setIsLoading(true);
 		const isExist = await existCitation(formData.cedula);
-		isExist ? setHasCitation(true) : setPage(page + 1);
+		if (isExist) {
+			setHasCitation(true);
+			setIsLoading(false);
+		} else {
+			setIsLoading(false);
+			setPage(page + 1);
+		}
+
+		// isExist ? setHasCitation(true) : setPage(page + 1);
 	}
 
 	// Render
@@ -58,7 +74,7 @@ const UserDataForm = () => {
 											...formData,
 											cedula: e.target.value,
 										});
-										setDataApi({})
+										setDataApi({});
 									}}
 								></InputMask>
 							</label>
@@ -119,19 +135,22 @@ const UserDataForm = () => {
 							</label>
 						</li>
 						<li>
-							{dataApi.ok ? (
-								<Button
-									className='NextBtn'
-									content='SIGUIENTE'
-									disabled={false}
-								></Button>
+							{isLoading ? (
+								<Button title='CARGANDO...' className='NextBtn' disabled={true}>
+									<Ring size={34} color='#003876'></Ring>
+								</Button>
+							) : dataApi.ok ? (
+								<Button className='NextBtn' disabled={false}>
+									SIGUIENTE
+								</Button>
 							) : (
 								<Button
 									title='Ingrese una cedula válida'
 									className='NextBtn'
-									content='SIGUIENTE'
 									disabled={true}
-								></Button>
+								>
+									SIGUIENTE
+								</Button>
 							)}
 						</li>
 					</ul>

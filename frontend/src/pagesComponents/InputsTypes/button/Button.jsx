@@ -8,7 +8,7 @@ const Button = props => {
 				onClick={props.functionOnClick}
 				disabled={props.disabled}
 			>
-				{props.content}
+				{props.children}
 			</button>
 		</>
 	);
