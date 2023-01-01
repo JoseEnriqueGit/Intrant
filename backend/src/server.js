@@ -7,7 +7,10 @@ const server = express();
 // middlewares
 // server.use(cors())
 
-server.use(cors());
+server.use(cors({
+    origin: 'http://localhost:4000'
+    
+  }));
 
 server.use(express.json())
 
