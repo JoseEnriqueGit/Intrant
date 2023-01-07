@@ -1,5 +1,15 @@
 import Citation from "../models/CitationModel.js";
 
+export const runServer = (req, res) => {
+	return res.json({
+		status: "success",
+		routes: {
+			getAllData: 'http://localhost:4000/all-citations',
+			getOneData: 'http://localhost:4000/citation/id',
+		},
+	});
+};
+
 export const getAllCitations = async (req, res) => {
 	try {
 		const result = await Citation.find();

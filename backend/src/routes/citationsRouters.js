@@ -1,21 +1,25 @@
 import { Router } from "express";
 import {
+	runServer,
 	getAllCitations,
 	getCitation,
 	newCitation,
 	modicCitation,
 	deleteCitation,
 } from "../controllers/citationController.js";
+
 const router = Router();
 
-router.get('/all-citations', getAllCitations);
+router.get("/", runServer);
 
-router.get('/citation/:cedula', getCitation);
+router.get("/all-citations", getAllCitations);
 
-router.post('/new-citation', newCitation);
+router.get("/citation/:cedula", getCitation);
 
-router.put('/modic-citation/:cedula', modicCitation);
+router.post("/new-citation", newCitation);
 
-router.delete('/delete-citation/:cedula', deleteCitation);
+router.put("/modic-citation/:cedula", modicCitation);
+
+router.delete("/delete-citation/:cedula", deleteCitation);
 
 export default router;

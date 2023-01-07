@@ -11,4 +11,11 @@ server.use(express.json())
 // Routes
 server.use(postsRouters);
 
-export default server;
+const PORT = process.env.PORT || 4000;
+
+async function runServer() {
+	await server.listen(PORT);
+	console.log(`Running in port ${PORT}`);
+}
+
+export default runServer;
