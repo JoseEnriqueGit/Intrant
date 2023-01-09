@@ -5,10 +5,10 @@ import { useContext, useState } from 'react';
 import { modifyCitation } from '../../../api/modifyCitation';
 import { sendEmail } from '../../../logic/sendEmail';
 // Components
+import { Ring } from '@uiball/loaders';
 import {
 	Form,
 	TitleHeader,
-	Button,
 	Input,
 	SelectStyle,
 	WarningDiv,
@@ -17,7 +17,12 @@ import {
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // Context
-import { FormDataContext, PageContext, DataApiContext } from '../../../hooks/contexts';
+import {
+	FormDataContext,
+	PageContext,
+	DataApiContext,
+	Loading,
+} from '../../../hooks/contexts';
 // Logic
 import { disableBeforeDays, isWorkingDay } from '../../../logic/date.js';
 // Options Imports
@@ -32,12 +37,14 @@ const ModifyCitation = props => {
 	const { formData, setFormData } = useContext(FormDataContext);
 	const { setDataApi } = useContext(DataApiContext);
 	const { page, setPage } = useContext(PageContext);
+	const { isLoading, setIsLoading } = useContext(Loading);
 	const [isNonWorking, setIsNonWorking] = useState(false);
 	const [isWeekend, setIsWeekend] = useState(false);
 	const [isModify, setIsModify] = useState(true);
 
 	async function handleChangeCitation(e) {
 		e.preventDefault();
+		setIsLoading(true);
 		const date = new Date(document.getElementById('dateService').value);
 		const { isWeekend, isHolyday } = isWorkingDay(date);
 		const isModify = await modifyCitation(formData.cedula, formData);
@@ -53,10 +60,11 @@ const ModifyCitation = props => {
 				setPage(page - 1);
 				sendEmail(formData, null, 'template_vv32ofb');
 				setFormData({});
-				setDataApi({})
-			}
-			else{
-				setIsModify(false)
+				setDataApi({});
+				setIsLoading(false);
+			} else {
+				setIsModify(false);
+				setIsLoading(false);
 			}
 		}
 	}
@@ -196,25 +204,35 @@ const ModifyCitation = props => {
 									size='lg'
 								/>
 							</button>
-							{formData.correo !== '' &&
-							formData.telefono !== '' &&
-							formData.asunto !== '' &&
-							formData.oficina !== '' &&
-							formData.fecha !== '' &&
-							formData.hora !== '' ? (
-								<Button
+							{
+								<button
+									title={
+										formData.correo === '' ||
+										formData.telefono === '' ||
+										formData.asunto === '' ||
+										formData.oficina === '' ||
+										formData.fecha === '' ||
+										formData.hora === ''
+											? 'Llene todos los campos'
+											: ''
+									}
 									className='NextBtn'
-									content='GUARDAR'
-									disabled={false}
-								></Button>
-							) : (
-								<Button
-									title='Ingrese una cedula válida'
-									className='NextBtn'
-									content='GUARDAR'
-									disabled={true}
-								></Button>
-							)}
+									disabled={
+										formData.correo === '' ||
+										formData.telefono === '' ||
+										formData.asunto === '' ||
+										formData.oficina === '' ||
+										formData.fecha === '' ||
+										formData.hora === ''
+									}
+								>
+									{isLoading ? (
+										<Ring size={34} color='#003876'></Ring>
+									) : (
+										'GUARDAR'
+									)}
+								</button>
+							}
 						</li>
 					</ul>
 				</fieldset>

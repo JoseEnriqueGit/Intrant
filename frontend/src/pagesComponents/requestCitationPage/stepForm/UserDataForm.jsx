@@ -10,7 +10,6 @@ import { Ring } from '@uiball/loaders';
 import {
 	Form,
 	TitleHeader,
-	Button,
 	Input,
 	OutPut,
 	WarningDiv,
@@ -32,6 +31,8 @@ const UserDataForm = () => {
 	const { setCedula } = useContext(UrlApi);
 	const [hasCitation, setHasCitation] = useState(false);
 
+	console.log(formData.length)
+
 	async function handleNextPage(e) {
 		e.preventDefault();
 		setIsLoading(true);
@@ -43,8 +44,6 @@ const UserDataForm = () => {
 			setIsLoading(false);
 			setPage(page + 1);
 		}
-
-		// isExist ? setHasCitation(true) : setPage(page + 1);
 	}
 
 	// Render
@@ -58,7 +57,7 @@ const UserDataForm = () => {
 					<ul>
 						<li>
 							<label>
-								CEDULA:
+								C&Eacute;DULA:
 								<InputMask
 									id='cedula'
 									name='userCedula'
@@ -135,23 +134,23 @@ const UserDataForm = () => {
 							</label>
 						</li>
 						<li>
-							{isLoading ? (
-								<Button title='CARGANDO...' className='NextBtn' disabled={true}>
+							<button
+								title={
+									formData.cedula === '' ||
+									formData.correo === '' ||
+									formData.telefono === ''
+										? 'Llene todos los campos'
+										: ''
+								}
+								className='NextBtn'
+								disabled={!dataApi.ok || formData.telefono === ''}
+							>
+								{isLoading ? (
 									<Ring size={34} color='#003876'></Ring>
-								</Button>
-							) : dataApi.ok ? (
-								<Button className='NextBtn' disabled={false}>
-									SIGUIENTE
-								</Button>
-							) : (
-								<Button
-									title='Ingrese una cedula válida'
-									className='NextBtn'
-									disabled={true}
-								>
-									SIGUIENTE
-								</Button>
-							)}
+								) : (
+									'SIGUIENTE'
+								)}
+							</button>
 						</li>
 					</ul>
 

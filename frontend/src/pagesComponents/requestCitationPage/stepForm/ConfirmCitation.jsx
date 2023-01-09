@@ -2,27 +2,33 @@
 import { useState, useContext } from 'react';
 import { createCitation } from '../../../api/createCitations';
 // components
-import { Form, TitleHeader, Button } from '../../../pagesComponents';
+import { Form, TitleHeader } from '../../../pagesComponents';
 import { faChevronLeft, faHomeAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Ring } from '@uiball/loaders';
 // Context
-import { FormDataContext, DataApiContext } from '../../../hooks/contexts';
+import {
+	FormDataContext,
+	DataApiContext,
+	Loading,
+} from '../../../hooks/contexts';
 import { sendEmail } from '../../../logic/sendEmail';
 
 const ConfirmCitation = props => {
 	const { formData } = useContext(FormDataContext);
 	const { dataApi } = useContext(DataApiContext);
+	const { isLoading, setIsLoading } = useContext(Loading);
 	const [isSend, setIsSend] = useState(false);
 
 	async function handleSendData(e) {
 		e.preventDefault();
-
-		if(createCitation(formData)){
+		setIsLoading(true);
+		if (createCitation(formData)) {
 			sendEmail(formData, dataApi, 'template_9r54z9a');
 			setIsSend(true);
-		}
-		else{
-			setIsSend(false)
+			setIsLoading(false);
+		} else {
+			setIsSend(false);
 		}
 	}
 
@@ -63,17 +69,30 @@ const ConfirmCitation = props => {
 							</li>
 						</div>
 
-						{isSend ? (
+						<li>
+							<button
+								className='BackBtn'
+								onClick={isSend ? props.backHome : props.backBtn}
+							>
+								<FontAwesomeIcon
+									icon={isSend ? faHomeAlt : faChevronLeft}
+									color='#ff6500'
+									size='lg'
+								/>
+							</button>
+							{!isSend && (
+								<button className='NextBtn' disabled={false}>
+									{isLoading ? (
+										<Ring size={34} color='#003876'></Ring>
+									) : (
+										'CONFIRMAR'
+									)}
+								</button>
+							)}
+						</li>
+
+						{isSend && (
 							<>
-								<li>
-									<button className='BackBtn' onClick={props.backHome}>
-										<FontAwesomeIcon
-											icon={faHomeAlt}
-											color='#ff6500'
-											size='lg'
-										/>
-									</button>
-								</li>
 								<li>
 									<a
 										href='https://ov.intrant.gob.do/#/login'
@@ -89,21 +108,6 @@ const ConfirmCitation = props => {
 									</span>
 								</li>
 							</>
-						) : (
-							<li>
-								<button className='BackBtn' onClick={props.backBtn}>
-									<FontAwesomeIcon
-										icon={faChevronLeft}
-										color='#ff6500'
-										size='lg'
-									/>
-								</button>
-								<Button
-									className='NextBtn'
-									content='CONFIRMAR'
-									disabled={false}
-								/>
-							</li>
 						)}
 					</ul>
 				</fieldset>

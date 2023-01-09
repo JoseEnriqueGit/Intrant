@@ -5,7 +5,6 @@ import { useState, useContext } from 'react';
 import {
 	Form,
 	TitleHeader,
-	Button,
 	Input,
 	NoOptionsMessage,
 	WarningDiv,
@@ -33,7 +32,6 @@ const DateServiceForm = props => {
 
 	function handleDatePickerValidation(e) {
 		e.preventDefault();
-
 		const date = new Date(document.getElementById('dateService').value);
 		const { isWeekend, isHolyday } = isWorkingDay(date);
 
@@ -140,21 +138,26 @@ const DateServiceForm = props => {
 								/>
 							</button>
 
-							{formData.oficina !== '' &&
-							formData.asunto !== '' &&
-							formData.hora !== '' ? (
-								<Button
-									className='NextBtn'
-									content='SIGUIENTE'
-									disabled={false}
-								/>
-							) : (
-								<Button
-									className='NextBtn'
-									content='SIGUIENTE'
-									disabled={true}
-								/>
-							)}
+							<button
+								title={
+									formData.length === undefined ||
+									formData.oficina === '' ||
+									formData.asunto === '' ||
+									formData.hora === '' ||
+									formData.fecha === ''
+										? 'Llene todos los campos'
+										: ''
+								}
+								className='NextBtn'
+								disabled={
+									formData.asunto === '' ||
+									formData.oficina === '' ||
+									formData.fecha === '' ||
+									formData.hora === ''
+								}
+							>
+								SIGUIENTE
+							</button>
 						</li>
 					</ul>
 				</fieldset>

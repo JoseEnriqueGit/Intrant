@@ -4,31 +4,35 @@ import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { deleteCitation } from '../../api/deleteCitation';
 // Components
-import { Form, TitleHeader, Button, WarningDiv } from '../../pagesComponents';
+import { Ring } from '@uiball/loaders';
+import { Form, TitleHeader, WarningDiv } from '../../pagesComponents';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // Context
-import { FormDataContext, DataApiContext } from '../../hooks/contexts';
+import { FormDataContext, DataApiContext, Loading } from '../../hooks/contexts';
 import UrlApi from '../../hooks/useEffects/useDataCedula';
 
 const CancelForm = () => {
 	const { formData, setFormData } = useContext(FormDataContext);
 	const { dataApi } = useContext(DataApiContext);
 	const { setCedula } = useContext(UrlApi);
+	const { isLoading, setIsLoading } = useContext(Loading);
 	const [hasCitation, setHasCitation] = useState(false);
 	const [isDeleted, setIsDeleted] = useState(false);
 
 	async function handleDeleteCitation(e) {
 		e.preventDefault();
-		const isDeleted = await deleteCitation(formData.cedula)
-		
-		if (isDeleted){
+		setIsLoading(true);
+		const isDeleted = await deleteCitation(formData.cedula);
+
+		if (isDeleted) {
 			setIsDeleted(true);
 			setHasCitation(false);
-		}
-		else{
+			setIsLoading(false);
+		} else {
 			setIsDeleted(false);
-			setHasCitation(true)
+			setHasCitation(true);
+			setIsLoading(false);
 		}
 	}
 
@@ -42,7 +46,7 @@ const CancelForm = () => {
 					<ul>
 						<li>
 							<label>
-								CEDULA:
+								C&Eacute;DULA:
 								<InputMask
 									id='cedula'
 									name='userCedula'
@@ -70,20 +74,17 @@ const CancelForm = () => {
 									size='lg'
 								/>
 							</Link>
-							{dataApi.ok ? (
-								<Button
-									className='NextBtn'
-									content='CANCELAR'
-									disabled={false}
-								></Button>
-							) : (
-								<Button
-									title='Ingrese una cedula válida'
-									className='NextBtn'
-									content='CANCELAR'
-									disabled={true}
-								></Button>
-							)}
+							<button
+								title={!dataApi.ok ? 'Ingrese una cédula válida' : ''}
+								className='NextBtn'
+								disabled={!dataApi.ok}
+							>
+								{isLoading ? (
+									<Ring size={34} color='#003876'></Ring>
+								) : (
+									'CANCELAR'
+								)}
+							</button>
 						</li>
 					</ul>
 				</fieldset>

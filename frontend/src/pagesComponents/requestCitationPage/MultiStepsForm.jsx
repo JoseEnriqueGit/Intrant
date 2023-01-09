@@ -3,7 +3,11 @@ import { useContext } from 'react';
 // components
 import { UserDataForm, DateServiceForm, ConfirmCitation } from './stepForm';
 // Context
-import { FormDataContext, PageContext, DataApiContext } from '../../hooks/contexts';
+import {
+	FormDataContext,
+	PageContext,
+	DataApiContext,
+} from '../../hooks/contexts';
 
 const MultiStepsForm = () => {
 	const { setFormData } = useContext(FormDataContext);
@@ -19,8 +23,16 @@ const MultiStepsForm = () => {
 
 	function backHome(e) {
 		e.preventDefault();
-		setFormData({});
-		setDataApi({})
+		setFormData({
+			cedula: '',
+			asunto: '',
+			oficina: '',
+			fecha: '',
+			hora: '',
+			telefono: '',
+			correo: '',
+		});
+		setDataApi({});
 		setPage(1);
 	}
 
