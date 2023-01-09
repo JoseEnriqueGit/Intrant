@@ -3,18 +3,28 @@ import { useContext } from 'react';
 // components
 import { ModifyValidation, ModifyCitation } from './stepForm';
 // Context
-import {PageContext, FormDataContext} from '../../hooks/contexts';
+import { PageContext, FormDataContext } from '../../hooks/contexts';
 
 export const MultiStepsModifyCitation = () => {
 	const { page, setPage } = useContext(PageContext);
 	const { setFormData } = useContext(FormDataContext);
+
 	function nextGetData(e) {
 		e.preventDefault();
 		setPage(page + 1);
 	}
+
 	function submitBack(e) {
 		e.preventDefault();
-		setFormData({})
+		setFormData({
+			cedula: '',
+			asunto: '',
+			oficina: '',
+			fecha: '',
+			hora: '',
+			telefono: '',
+			correo: '',
+		});
 		setPage(page - 1);
 	}
 

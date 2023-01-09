@@ -5,12 +5,7 @@ import { Link } from 'react-router-dom';
 import { existCitation } from '../../../api/existCitation';
 // Components
 import { Ring } from '@uiball/loaders';
-import {
-	Form,
-	TitleHeader,
-	Button,
-	WarningDiv,
-} from '../../../pagesComponents';
+import { Form, TitleHeader, WarningDiv } from '../../../pagesComponents';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // Context
@@ -34,6 +29,7 @@ const ModifyValidation = () => {
 		e.preventDefault();
 		setIsLoading(true);
 		const { isExist, getCitation } = await existCitation(formData.cedula);
+
 		if (isExist) {
 			setFormData(getCitation);
 			setPage(page + 1);
@@ -94,24 +90,6 @@ const ModifyValidation = () => {
 									'SIGUIENTE'
 								)}
 							</button>
-							{/* 
-							{dataApi.ok || formData.cedula !== '' ? (
-								<button className='NextBtn' disabled={false}>
-									{isLoading ? (
-										<Ring size={34} color='#003876'></Ring>
-									) : (
-										'SIGUIENTE'
-									)}
-								</button>
-							) : (
-								<button
-									title='Ingrese una cedula válida'
-									className='NextBtn'
-									disabled={true}
-								>
-									SIGUIENTE
-								</button>
-							)} */}
 						</li>
 					</ul>
 				</fieldset>

@@ -59,7 +59,15 @@ const ModifyCitation = props => {
 			if (isModify) {
 				setPage(page - 1);
 				sendEmail(formData, null, 'template_vv32ofb');
-				setFormData({});
+				setFormData({
+					cedula: '',
+					asunto: '',
+					oficina: '',
+					fecha: '',
+					hora: '',
+					telefono: '',
+					correo: '',
+				});
 				setDataApi({});
 				setIsLoading(false);
 			} else {
@@ -204,35 +212,33 @@ const ModifyCitation = props => {
 									size='lg'
 								/>
 							</button>
-							{
-								<button
-									title={
-										formData.correo === '' ||
-										formData.telefono === '' ||
-										formData.asunto === '' ||
-										formData.oficina === '' ||
-										formData.fecha === '' ||
-										formData.hora === ''
-											? 'Llene todos los campos'
-											: ''
-									}
-									className='NextBtn'
-									disabled={
-										formData.correo === '' ||
-										formData.telefono === '' ||
-										formData.asunto === '' ||
-										formData.oficina === '' ||
-										formData.fecha === '' ||
-										formData.hora === ''
-									}
-								>
-									{isLoading ? (
-										<Ring size={34} color='#003876'></Ring>
-									) : (
-										'GUARDAR'
-									)}
-								</button>
-							}
+							<button
+								title={
+									formData.correo === '' ||
+									formData.telefono === '' ||
+									formData.asunto === '' ||
+									formData.oficina === '' ||
+									formData.fecha === '' ||
+									formData.hora === ''
+										? 'Llene todos los campos'
+										: ''
+								}
+								className='NextBtn'
+								disabled={
+									formData.correo === '' ||
+									formData.telefono === '' ||
+									formData.asunto === '' ||
+									formData.oficina === '' ||
+									formData.fecha === '' ||
+									formData.hora === ''
+								}
+							>
+								{isLoading ? (
+									<Ring size={34} color='#003876'></Ring>
+								) : (
+									'GUARDAR'
+								)}
+							</button>
 						</li>
 					</ul>
 				</fieldset>

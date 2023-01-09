@@ -31,8 +31,6 @@ const UserDataForm = () => {
 	const { setCedula } = useContext(UrlApi);
 	const [hasCitation, setHasCitation] = useState(false);
 
-	console.log(formData.length)
-
 	async function handleNextPage(e) {
 		e.preventDefault();
 		setIsLoading(true);

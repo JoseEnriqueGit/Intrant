@@ -13,8 +13,6 @@ const MultiStepsForm = () => {
 	const { setFormData } = useContext(FormDataContext);
 	const { page, setPage } = useContext(PageContext);
 	const { setDataApi } = useContext(DataApiContext);
-	// !
-	// console.log(formData);
 
 	function submitBack(e) {
 		e.preventDefault();
