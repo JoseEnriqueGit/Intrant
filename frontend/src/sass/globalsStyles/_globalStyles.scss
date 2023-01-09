@@ -1,67 +1,67 @@
 @use '../util' as var;
 
-*{
-    // Typography
-    font-family: 'Itim', cursive;
-    font-family: 'Rubik', sans-serif;
+* {
+	// Typography
+	font-family: 'Itim', cursive;
+	font-family: 'Rubik', sans-serif;
 }
 
-body{
-    // Composition
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    user-select: none;
-    // Box-model
-    min-height: 100vh;
-    margin: 0px;
-    padding-top: 4vw;
+body {
+	// Composition
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	// user-select: none;
+	// Box-model
+	min-height: 100vh;
+	margin: 0px;
+	padding-top: 4vw;
 
-    Header{
-        // Composition
-        display: flex;
-        justify-content: center;
-        //Box-model
-        height: 4.8125rem;
+	Header {
+		// Composition
+		display: flex;
+		justify-content: center;
+		//Box-model
+		height: 4.8125rem;
 
-        img{
-            //Box-model
-            width: 100%;
-            max-width: 351px;
-            object-fit: contain;
-        }
-    }
+		img {
+			//Box-model
+			width: 100%;
+			max-width: 351px;
+			object-fit: contain;
+		}
+	}
 
-    main{
-        // Composition
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        // Box-model
-        width: 100%;
+	main {
+		// Composition
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		// Box-model
+		width: 100%;
 
-        h1{
-            // Typography
-            text-align: center;
-            font-size: 26px;
-        }
-    }
+		h1 {
+			// Typography
+			text-align: center;
+			font-size: 26px;
+		}
+	}
 
-    footer{
-        // Composition
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        // Box-model
-        width: 100%;
-        height: 2.5rem;
-        margin-top: auto;
-        // visual
-        background-color: var.$Sec;
-        // Typography
-        color: var.$Pri;
-        text-align: center;
-    }
+	footer {
+		// Composition
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		// Box-model
+		width: 100%;
+		height: 2.5rem;
+		margin-top: auto;
+		// visual
+		background-color: var.$Sec;
+		// Typography
+		color: var.$Pri;
+		text-align: center;
+	}
 }
