@@ -1,5 +1,4 @@
 export { default as Form } from './Form';
-export * from './InputsTypes/button';
 export * from './InputsTypes';
 export * from './InputsTypes/select';
 export { default as TitleHeader } from './TitleHeader';
