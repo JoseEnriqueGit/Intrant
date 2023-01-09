@@ -82,7 +82,7 @@ const ModifyCitation = props => {
 			<TitleHeader text='CONFIGURAR CITA' />
 			<Form className='ModifyCitationForm' onSubmit={handleChangeCitation}>
 				<fieldset lang='es'>
-					<legend>Cambiar Datos</legend>
+					<legend>CAMBIAR DATOS</legend>
 
 					<ul>
 						<li>
@@ -101,7 +101,7 @@ const ModifyCitation = props => {
 						</li>
 						<li>
 							<label>
-								TELEFONO:
+								TEL&Eacute;FONO:
 								<InputMask
 									id='tel'
 									name='user_tel'

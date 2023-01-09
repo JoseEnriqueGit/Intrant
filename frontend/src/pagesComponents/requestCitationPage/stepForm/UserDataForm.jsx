@@ -114,7 +114,7 @@ const UserDataForm = () => {
 						</li>
 						<li>
 							<label>
-								TELEFONO:
+								TEL&Eacute;FONO:
 								<InputMask
 									id='tel'
 									name='user_tel'

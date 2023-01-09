@@ -1,18 +1,18 @@
 export const AllServices = [
-	{ value: 'RENOVACION DE LICENCIA', label: 'RENOVACION DE LICENCIA' },
+	{ value: 'RENOVACIÓN DE LICENCIA', label: 'RENOVACIÓN DE LICENCIA' },
 	{
-		value: 'LICENCIA (EXAMEN PRACTICO)',
-		label: 'LICENCIA (EXAMEN PRACTICO)',
+		value: 'LICENCIA (EXAMEN PRÁCTICO)',
+		label: 'LICENCIA (EXAMEN PRÁCTICO)',
 	},
 	{ value: 'DUPLICADOS', label: 'DUPLICADOS' },
 	{ value: 'CARNET DE APRENDIZAJE', label: 'CARNET DE APRENDIZAJE' },
 	{
-		value: 'CAMBIO DE CATEGORIA 02 A 03',
-		label: 'CAMBIO DE CATEGORIA 02 A 03',
+		value: 'CAMBIO DE CATEGORÍA 02 A 03',
+		label: 'CAMBIO DE CATEGORÍA 02 A 03',
 	},
 	{
-		value: 'CAMBIO DE CATEGORIA 03 A 04',
-		label: 'CAMBIO DE CATEGORIA 03 A 04',
+		value: 'CAMBIO DE CATEGORÍA 03 A 04',
+		label: 'CAMBIO DE CATEGORÍA 03 A 04',
 	},
 	{
 		value: 'CAMBIO LICENCIA MILITAR A CIVIL',
@@ -58,20 +58,20 @@ export const arraysObjsServices = [
 	{
 		// Oficina Central, Azua
 		optionsAllServices: [
-			{ value: 'RENOVACION DE LICENCIA', label: 'RENOVACION DE LICENCIA' },
+			{ value: 'RENOVACIÓN DE LICENCIA', label: 'RENOVACIÓN DE LICENCIA' },
 			{
-				value: 'LICENCIA (EXAMEN PRACTICO)',
-				label: 'LICENCIA (EXAMEN PRACTICO)',
+				value: 'LICENCIA (EXAMEN PRÁCTICO)',
+				label: 'LICENCIA (EXAMEN PRÁCTICO)',
 			},
 			{ value: 'DUPLICADOS', label: 'DUPLICADOS' },
 			{ value: 'CARNET DE APRENDIZAJE', label: 'CARNET DE APRENDIZAJE' },
 			{
-				value: 'CAMBIO DE CATEGORIA 02 A 03',
-				label: 'CAMBIO DE CATEGORIA 02 A 03',
+				value: 'CAMBIO DE CATEGORÍA 02 A 03',
+				label: 'CAMBIO DE CATEGORÍA 02 A 03',
 			},
 			{
-				value: 'CAMBIO DE CATEGORIA 03 A 04',
-				label: 'CAMBIO DE CATEGORIA 03 A 04',
+				value: 'CAMBIO DE CATEGORÍA 03 A 04',
+				label: 'CAMBIO DE CATEGORÍA 03 A 04',
 			},
 			{
 				value: 'CAMBIO LICENCIA MILITAR A CIVIL',
@@ -93,20 +93,20 @@ export const arraysObjsServices = [
 		],
 		// PuertoPlata, Santiago
 		optionsEightServices: [
-			{ value: 'RENOVACION DE LICENCIA', label: 'RENOVACION DE LICENCIA' },
+			{ value: 'RENOVACIÓN DE LICENCIA', label: 'RENOVACIÓN DE LICENCIA' },
 			{
-				value: 'LICENCIA (EXAMEN PRACTICO)',
-				label: 'LICENCIA (EXAMEN PRACTICO)',
+				value: 'LICENCIA (EXAMEN PRÁCTICO)',
+				label: 'LICENCIA (EXAMEN PRÁCTICO)',
 			},
 			{ value: 'DUPLICADOS', label: 'DUPLICADOS' },
 			{ value: 'CARNET DE APRENDIZAJE', label: 'CARNET DE APRENDIZAJE' },
 			{
-				value: 'CAMBIO DE CATEGORIA 02 A 03',
-				label: 'CAMBIO DE CATEGORIA 02 A 03',
+				value: 'CAMBIO DE CATEGORÍA 02 A 03',
+				label: 'CAMBIO DE CATEGORÍA 02 A 03',
 			},
 			{
-				value: 'CAMBIO DE CATEGORIA 03 A 04',
-				label: 'CAMBIO DE CATEGORIA 03 A 04',
+				value: 'CAMBIO DE CATEGORÍA 03 A 04',
+				label: 'CAMBIO DE CATEGORÍA 03 A 04',
 			},
 			{ value: 'NUEVO MOTORISTA', label: 'NUEVO MOTORISTA' },
 			{
@@ -116,10 +116,10 @@ export const arraysObjsServices = [
 		],
 		// Barahona, Mao, Nagua, San Juan De la Maguana
 		optionsSixServices: [
-			{ value: 'RENOVACION DE LICENCIA', label: 'RENOVACION DE LICENCIA' },
+			{ value: 'RENOVACIÓN DE LICENCIA', label: 'RENOVACIÓN DE LICENCIA' },
 			{
-				value: 'LICENCIA (EXAMEN PRACTICO)',
-				label: 'LICENCIA (EXAMEN PRACTICO)',
+				value: 'LICENCIA (EXAMEN PRÁCTICO)',
+				label: 'LICENCIA (EXAMEN PRÁCTICO)',
 			},
 			{ value: 'DUPLICADOS', label: 'DUPLICADOS' },
 			{ value: 'CARNET DE APRENDIZAJE', label: 'CARNET DE APRENDIZAJE' },
@@ -131,47 +131,47 @@ export const arraysObjsServices = [
 		],
 		// BlueMall, Higüey, La vega,
 		optionsFourServices: [
-			{ value: 'RENOVACION DE LICENCIA', label: 'RENOVACION DE LICENCIA' },
+			{ value: 'RENOVACIÓN DE LICENCIA', label: 'RENOVACIÓN DE LICENCIA' },
 			{
-				value: 'LICENCIA (EXAMEN PRACTICO)',
-				label: 'LICENCIA (EXAMEN PRACTICO)',
+				value: 'LICENCIA (EXAMEN PRÁCTICO)',
+				label: 'LICENCIA (EXAMEN PRÁCTICO)',
 			},
 			{ value: 'DUPLICADOS', label: 'DUPLICADOS' },
 			{ value: 'CARNET DE APRENDIZAJE', label: 'CARNET DE APRENDIZAJE' },
 		],
 		// EspañaMadrid, MegaCentro, MulticentroChurchill, NewYork, Sambil,
 		optionsTwoService: [
-			{ value: 'RENOVACION DE LICENCIA', label: 'RENOVACION DE LICENCIA' },
+			{ value: 'RENOVACIÓN DE LICENCIA', label: 'RENOVACIÓN DE LICENCIA' },
 			{ value: 'DUPLICADOS', label: 'DUPLICADOS' },
 		],
 		optionsLaRomana: [
-			{ value: 'RENOVACION DE LICENCIA', label: 'RENOVACION DE LICENCIA' },
+			{ value: 'RENOVACIÓN DE LICENCIA', label: 'RENOVACIÓN DE LICENCIA' },
 			{
-				value: 'LICENCIA (EXAMEN PRACTICO)',
-				label: 'LICENCIA (EXAMEN PRACTICO)',
+				value: 'LICENCIA (EXAMEN PRÁCTICO)',
+				label: 'LICENCIA (EXAMEN PRÁCTICO)',
 			},
 			{ value: 'DUPLICADOS', label: 'DUPLICADOS' },
 			{ value: 'CARNET DE APRENDIZAJE', label: 'CARNET DE APRENDIZAJE' },
 			{
-				value: 'CAMBIO DE CATEGORIA 02 A 03',
-				label: 'CAMBIO DE CATEGORIA 02 A 03',
+				value: 'CAMBIO DE CATEGORÍA 02 A 03',
+				label: 'CAMBIO DE CATEGORÍA 02 A 03',
 			},
 			{
-				value: 'CAMBIO DE CATEGORIA 03 A 04',
-				label: 'CAMBIO DE CATEGORIA 03 A 04',
+				value: 'CAMBIO DE CATEGORÍA 03 A 04',
+				label: 'CAMBIO DE CATEGORÍA 03 A 04',
 			},
 		],
 		optionsSanFrancisco: [
-			{ value: 'RENOVACION DE LICENCIA', label: 'RENOVACION DE LICENCIA' },
+			{ value: 'RENOVACIÓN DE LICENCIA', label: 'RENOVACIÓN DE LICENCIA' },
 			{
-				value: 'LICENCIA (EXAMEN PRACTICO)',
-				label: 'LICENCIA (EXAMEN PRACTICO)',
+				value: 'LICENCIA (EXAMEN PRÁCTICO)',
+				label: 'LICENCIA (EXAMEN PRÁCTICO)',
 			},
 			{ value: 'DUPLICADOS', label: 'DUPLICADOS' },
 			{ value: 'CARNET DE APRENDIZAJE', label: 'CARNET DE APRENDIZAJE' },
 			{
-				value: 'CAMBIO DE CATEGORIA 02 A 03',
-				label: 'CAMBIO DE CATEGORIA 02 A 03',
+				value: 'CAMBIO DE CATEGORÍA 02 A 03',
+				label: 'CAMBIO DE CATEGORÍA 02 A 03',
 			},
 			{ value: 'NUEVO MOTORISTA', label: 'NUEVO MOTORISTA' },
 		],

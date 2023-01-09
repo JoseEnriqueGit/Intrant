@@ -60,7 +60,7 @@ const ConfirmCitation = props => {
 								<span>{formData.hora}</span>
 							</li>
 							<li>
-								<strong>TELEFONO: </strong>
+								<strong>TEL&Eacute;FONO: </strong>
 								<span>{formData.telefono}</span>
 							</li>
 							<li>
@@ -99,7 +99,7 @@ const ConfirmCitation = props => {
 										target='_blank'
 										rel='noreferrer'
 									>
-										Pagos en linea
+										Pagos en l&iacute;nea
 									</a>
 								</li>
 								<li>
