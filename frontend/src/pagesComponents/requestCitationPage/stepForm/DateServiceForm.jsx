@@ -19,8 +19,8 @@ import { disableBeforeDays, isWorkingDay } from '../../../logic/date.js';
 // Options Imports
 import {
 	AllServices,
-	optionService,
-	optionsOficinas,
+	optionServiceByOffice,
+	optionsOffices,
 	optionsTimes,
 } from '../../InputsTypes';
 
@@ -51,9 +51,27 @@ const DateServiceForm = props => {
 			<TitleHeader text='CONFIGURAR CITA ' />
 			<Form className='FormDateService' onSubmit={handleDatePickerValidation}>
 				<fieldset lang='es'>
-					<legend>LUGAR DEL SERVICIO</legend>
+					<legend>LUGAR DE LA CITA</legend>
 
 					<ul>
+						<li>
+							<label>
+								SERVICIO:
+								<Select
+									id='service'
+									required
+									placeholder={'Seleccione...'}
+									styles={SelectStyle}
+									options={AllServices}
+									value={
+										formData.asunto !== ''
+											? AllServices.find(obj => obj.value === formData.asunto)
+											: ''
+									}
+									onChange={e => setFormData({ ...formData, asunto: e.value, oficina: ''})}
+								/>
+							</label>
+						</li>
 						<li>
 							<label>
 								OFICINA:
@@ -61,21 +79,25 @@ const DateServiceForm = props => {
 									id='office'
 									placeholder={'Seleccione...'}
 									styles={SelectStyle}
-									options={optionsOficinas}
-									components={'NoOptionsMessage'}
-									value={optionsOficinas.find(
-										obj => obj.value === formData.oficina
-									)}
+									options={optionServiceByOffice[formData.asunto]}
+									components={{ NoOptionsMessage }}
+									value={formData.oficina !== ''
+									? optionsOffices.find(obj => obj.value === formData.oficina)
+									: ''}
 									onChange={e =>
 										setFormData({
 											...formData,
 											oficina: e.value,
-											asunto: '',
 										})
 									}
 								/>
 							</label>
 						</li>
+					</ul>
+				</fieldset>
+				<fieldset>
+					<legend>PRESENCIA DE LA CITA</legend>
+					<ul>
 						<li>
 							<Input
 								label='FECHA:'
@@ -88,30 +110,6 @@ const DateServiceForm = props => {
 									setFormData({ ...formData, fecha: e.target.value })
 								}
 							/>
-						</li>
-					</ul>
-				</fieldset>
-				<fieldset>
-					<legend>SELECCIONE EL SERVICIO</legend>
-					<ul>
-						<li>
-							<label>
-								SERVICIO:
-								<Select
-									id='service'
-									required
-									placeholder={'Seleccione...'}
-									styles={SelectStyle}
-									options={optionService[formData.oficina]}
-									value={
-										formData.asunto !== ''
-											? AllServices.find(obj => obj.value === formData.asunto)
-											: ''
-									}
-									onChange={e => setFormData({ ...formData, asunto: e.value })}
-									components={{ NoOptionsMessage }}
-								/>
-							</label>
 						</li>
 						<li>
 							<label>
