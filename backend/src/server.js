@@ -5,8 +5,7 @@ import postsRouters from "./routes/citationsRouters.js";
 const server = express();
 
 // middlewares
-server.use(cors())
-server.use(express.json())
+server.use(cors(), express.json());
 
 // Routes
 server.use(postsRouters);
