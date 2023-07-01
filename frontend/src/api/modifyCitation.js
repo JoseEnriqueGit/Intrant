@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const modifyCitation = async (cedula, formData) => {
 	const res = await axios.put(
-		'https://intrant-api.onrender.com/modic-citation/' + cedula,
+		'https://intrantapi.onrender.com/modic-citation/' + cedula,
 		formData
 	);
 	
